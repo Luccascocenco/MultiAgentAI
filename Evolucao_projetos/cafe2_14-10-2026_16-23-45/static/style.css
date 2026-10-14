@@ -1,0 +1,224 @@
+:root {
+    --fundo: #FCFCFA;
+    --superficie: #F5EFAF;
+    --texto: #34495A;
+    --texto-suave: #111111;
+    --primaria: #E2E5F7;
+    --primaria-hover: #D8EAE0;
+    --sobre-primaria: #111111;
+    --borda: #A8B1C2;
+    --espaco: 20px;
+    --raio: 10px;
+    --sombra: 0 4px 14px rgba(0, 0, 0, 0.35);
+    --fonte: Arial, sans-serif;
+}
+
+body {
+    font-family: var(--fonte);
+    margin: 0;
+    padding: 0;
+    background-color: var(--fundo);
+    color: var(--texto-suave);
+}
+
+header {
+    background-color: var(--borda);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primaria);
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+
+header nav a {
+    color: var(--borda);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#hero {
+    background-image: linear-gradient(to bottom, var(--superficie), var(--fundo));
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#hero h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--texto);
+}
+
+#hero p {
+    font-size: 18px;
+    color: var(--borda);
+}
+
+button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--primaria-hover);
+}
+
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--espaco);
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: var(--fundo);
+    border: 1px solid var(--borda);
+    padding: var(--espaco);
+    box-shadow: var(--sombra);
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: var(--espaco);
+}
+
+.card p {
+    font-size: 14px;
+    color: var(--borda);
+}
+
+button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    border: none;
+    padding: var(--espaco) var(--espaco) var(--espaco);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--primaria-hover);
+}
+
+#produtos-container {
+    padding: 20px;
+}
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--espaco);
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+.produto-card {
+    background-color: var(--fundo);
+    border: 1px solid var(--borda);
+    padding: var(--espaco);
+    box-shadow: var(--sombra);
+}
+
+.produto-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.produto-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: var(--espaco);
+}
+
+.produto-card p {
+    font-size: 14px;
+    color: var(--borda);
+}
+
+button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    border: none;
+    padding: var(--espaco) var(--espaco) var(--espaco);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--primaria-hover);
+}
+
+/* Ajuste automático: borda, transição e hover dos cards */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.produto-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.produto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+
+/* Ajuste automático: imagem do hero */
+#hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(img/hero.svg);
+    background-size: cover;
+    background-position: center bottom;
+    min-height: 360px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+#hero h1, #hero p {
+    flex-basis: 100%;
+    margin: 0;
+}
+#hero, #hero h1, #hero p {
+    color: #ffffff;
+}

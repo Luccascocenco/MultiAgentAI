@@ -1,0 +1,70 @@
+**database.sql**
+
+```sql
+CREATE TABLE usuarios (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    email TEXT NOT NULL,
+    senha TEXT NOT NULL,
+    tipo TEXT NOT NULL
+);
+
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    descricao TEXT,
+    preco REAL NOT NULL,
+    foto TEXT
+);
+
+CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY,
+    usuario_id INTEGER NOT NULL,
+    total REAL NOT NULL,
+    data_hora TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+CREATE TABLE pedidos_produto (
+    id INTEGER PRIMARY KEY,
+    pedido_id INTEGER NOT NULL,
+    produto_id INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+
+CREATE TABLE estoque (
+    id INTEGER PRIMARY KEY,
+    produto_id INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+
+CREATE TABLE opcoes_entrega (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL
+);
+
+CREATE TABLE opcoes_pagamento (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL
+);
+
+CREATE TABLE pedidos_entrega (
+    id INTEGER PRIMARY KEY,
+    pedido_id INTEGER NOT NULL,
+    opcao_entrega_id INTEGER NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (opcao_entrega_id) REFERENCES opcoes_entrega(id)
+);
+
+CREATE TABLE pedidos_pagamento (
+    id INTEGER PRIMARY KEY,
+    pedido_id INTEGER NOT NULL,
+    opcao_pagamento_id INTEGER NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (opcao_pagamento_id) REFERENCES opcoes_pagamento(id);
+```
+
+Espero que isso tenha ajudado a criar um banco de dados adequado para a sua loja de comidas japonesas!

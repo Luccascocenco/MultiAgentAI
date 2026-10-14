@@ -1,0 +1,365 @@
+**ATÉLIÊ ARTEVIVA - Arquitetura**
+
+**Paleta de cores**
+
+| Cor | Hexadecimal |
+| --- | --- |
+| Pêssego néctar | `#F8D2B8` |
+| Azul piscina suave | `#BFE8E5` |
+| Amarelo baunilha | `#F6E6A8` |
+| Verde pistache pastel | `#D7E6B1` |
+| Rosa chá | `#EBC9D2` |
+| Branco algodão | `#FFFCF6` |
+| Marrom acinzentado | `#71665F` |
+
+**Cabeçalho**
+
+* Logotipo textual: ATELIÊ ARTEVIVA
+* Ícone de pincel ou paleta de pintura
+* Menu: Início, Desenho, Pintura, Papéis e Acessórios
+* Campo de pesquisa de produtos
+* Ícone de carrinho com contador de itens
+
+**Página inicial**
+
+* Título: "SUA IMAGINAÇÃO NÃO TEM LIMITES"
+* Subtítulo: "Encontre os materiais certos para transformar suas ideias em desenhos, pinturas e obras cheias de personalidade"
+* Botão em azul piscina suave "Explorar materiais"
+* Botão secundário "Descobrir novidades"
+* Imagem de destaque com pincéis, tintas, lápis coloridos, papéis artísticos e uma paleta de pintura organizados sobre uma mesa clara
+* Pequenas etiquetas visuais como "Crie sem limites" e "Inspiração em cada detalhe"
+
+**Catálogo de produtos**
+
+* Tabela de produtos:
+	+ Desenho e ilustração
+	+ Pintura e coloração
+	+ Pincéis e ferramentas
+	+ Papéis e superfícies
+	+ Kits criativos e acessórios
+* Colunas: Nome, Descrição, Quantidade, Preço, Botão "Adicionar ao carrinho"
+* Ordenação: menor preço, maior preço, nome
+
+**Backend**
+
+```python
+from flask import Flask, jsonify, request
+import sqlite3
+import os
+
+# Configurações do Flask
+app = Flask(__name__, static_folder="static", static_url_path="")
+
+
+# Conexão com banco de dados
+def get_db_connection():
+    conn = sqlite3.connect("database.db")
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+# Inicialização do banco de dados
+def inicializar_banco():
+    conn = get_db_connection()
+    with open("database/schema.sql", encoding="utf-8") as arquivo:
+        conn.executescript(arquivo.read())
+    conn.commit()
+    conn.close()
+
+
+# Rota para listar produtos
+@app.route("/api/produtos", methods=["GET"])
+def listar_produtos():
+    conn = get_db_connection()
+    produtos = conn.execute("SELECT id, nome, descricao, preco FROM produtos ORDER BY preco ASC").fetchall()
+    conn.close()
+    return jsonify([dict(linha) for linha in produtos])
+
+
+# Rota para criar um novo produto
+@app.route("/api/produtos", methods=["POST"])
+def criar_produto():
+    dados = request.get_json()
+    conn = get_db_connection()
+    conn.execute("INSERT INTO produtos (nome, descricao, preco) VALUES (?, ?, ?)", (dados["nome"], dados.get("descricao"), dados["preco"]))
+    conn.commit()
+    produto_id = conn.lastrowid
+    conn.close()
+    return jsonify({"id": produto_id}), 201
+
+
+# Rota para atualizar pedido
+@app.route("/carrinho", methods=["POST"])
+def atualizar_carrinho():
+    dados = request.get_json()
+    conn = get_db_connection()
+    conn.execute("UPDATE pedidos SET quantidade = ? WHERE id = ?", (dados["quantidade"], dados["produto_id"]))
+    conn.commit()
+    conn.close()
+    return jsonify({"mensagem": "Produto atualizado com sucesso"})
+
+
+# Rota para visualizar pedido
+@app.route("/pedidos", methods=["GET"])
+def visualizar_pedidos():
+    conn = get_db_connection()
+    pedidos = conn.execute("SELECT id, produtoId, quantidade FROM pedidos").fetchall()
+    conn.close()
+    return jsonify([dict(linha) for linha in pedidos])
+
+
+# Rota para consultar produto por ID
+@app.route("/api/produtos/<int:produto_id>", methods=["GET"])
+def consultar_produto(produto_id):
+    conn = get_db_connection()
+    produto = conn.execute("SELECT nome, descricao, preco FROM produtos WHERE id = ?", (produto_id,)).fetchone()
+    conn.close()
+    if produto is None:
+        return jsonify({"erro": "Produto não encontrado"}), 404
+    return jsonify({"nome": produto[0], "descricao": produto[1], "preco": produto[2]})
+
+
+# Inicialização do servidor
+def inicializar_servidor():
+    inicializar_banco()
+    porta = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, port=porta)
+
+
+if __name__ == "__main__":
+    inicializar_servidor()
+```
+
+**Frontend**
+
+* Arquivo `index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATELIÊ ARTEVIVA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Desenho</a></li>
+                <li><a href="#">Pintura</a></li>
+                <li><a href="#">Papéis e Acessórios</a></li>
+            </ul>
+        </nav>
+        <div class="logotipo">
+            <span>ATELIÊ ARTEVIVA</span>
+        </div>
+    </header>
+    <main>
+        <section class="produtos">
+            <h2>Produtos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="produtos-tabela">
+                </tbody>
+            </table>
+        </section>
+        <section class="carrinho">
+            <h2>Carrinho</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="carrinho-tabela">
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 ATELÍÊ ARTEVIVA</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+* Arquivo `style.css`:
+
+```css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8d2b8;
+}
+
+header {
+    background-color: #bfe8e5;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #71665F;
+}
+
+.logotipo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f6e6a8;
+}
+
+.produtos {
+    background-color: #d7e6b1;
+    padding: 20px;
+}
+
+.produtos h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.produtos table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.produtos th, .produtos td {
+    border: 1px solid #71665F;
+    padding: 10px;
+    text-align: left;
+}
+
+.carrinho {
+    background-color: #e7bcdf;
+    padding: 20px;
+}
+
+.carrinho h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carrinho table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.carrinho th, .carrinho td {
+    border: 1px solid #71665F;
+    padding: 10px;
+    text-align: left;
+}
+
+#produtos-tabela {
+    border-collapse: collapse;
+}
+
+#produtos-tabela th, #produtos-tabela td {
+    border: 1px solid #71665F;
+    padding: 10px;
+    text-align: left;
+}
+
+#carrinho-tabela {
+    border-collapse: collapse;
+}
+
+#carrinho-tabela th, #carrinho-tabela td {
+    border: 1px solid #71665F;
+    padding: 10px;
+    text-align: left;
+}
+```
+
+* Arquivo `script.js`:
+
+```javascript
+// Carregar produtos
+fetch('/api/produtos')
+    .then(response => response.json())
+    .then(produtos => {
+        produtos.forEach(produto => {
+            const produtoElemento = document.createElement('tr');
+            produtoElemento.innerHTML = `
+                <td>${produto.nome}</td>
+                <td>${produto.descricao}</td>
+                <td>${produto.preco}</td>
+                <td><a href="#" class="action">Adicionar ao Carrinho</a></td>
+            `;
+            document.getElementById('produtos-tabela').appendChild(produtoElemento);
+        });
+    });
+
+// Adicionar produto ao carrinho
+document.querySelectorAll('.action').forEach(actionElement => {
+    actionElement.addEventListener('click', () => {
+        fetch('/carrinho', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ produtoId: actionElement.dataset.produtoId, quantidade: 1 })
+        })
+            .then(response => response.json())
+            .then(mensagem => console.log(mensagem));
+    });
+});
+
+// Mostrar pedido atual
+fetch('/carrinho')
+    .then(response => response.json())
+    .then(pedido => {
+        pedido.forEach(produto => {
+            const produtoElemento = document.createElement('tr');
+            produtoElemento.innerHTML = `
+                <td>${produto.nome}</td>
+                <td>${produto.quantidade}</td>
+                <td><a href="#" class="action">Atualizar Quantidade</a></td>
+            `;
+            document.getElementById('carrinho-tabela').appendChild(produtoElemento);
+        });
+    });
+
+// Atualizar quantidade de produto no carrinho
+document.querySelectorAll('.action').forEach(actionElement => {
+    actionElement.addEventListener('click', () => {
+        fetch('/carrinho', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ produtoId: actionElement.dataset.produtoId, quantidade: actionElement.dataset.quantidade + 1 })
+        })
+            .then(response => response.json())
+            .then(mensagem => console.log(mensagem));
+    });
+});
+```
+
+Espero que isso ajude! Se tiver alguma dúvida ou precisar de mais ajuda, não hesite em perguntar.

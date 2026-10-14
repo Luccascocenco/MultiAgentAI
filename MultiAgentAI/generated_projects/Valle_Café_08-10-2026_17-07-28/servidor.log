@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "C:\Users\sakai\OneDrive - Centro Paula Souza\Área de Trabalho\ProjetoPy\MultiAgentAI\generated_projects\Valle_Café_08-10-2026_17-07-28\backend.py", line 71, in <module>
+    inicializar_banco()
+    ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\sakai\OneDrive - Centro Paula Souza\Área de Trabalho\ProjetoPy\MultiAgentAI\generated_projects\Valle_Café_08-10-2026_17-07-28\backend.py", line 24, in inicializar_banco
+    subprocess.check_call(['sqlite3', DB_PATH, 'import', SCHEMA_PATH])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sakai\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\subprocess.py", line 415, in check_call
+    retcode = call(*popenargs, **kwargs)
+  File "C:\Users\sakai\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\subprocess.py", line 396, in call
+    with Popen(*popenargs, **kwargs) as p:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sakai\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sakai\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\subprocess.py", line 1553, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] O sistema não pode encontrar o arquivo especificado

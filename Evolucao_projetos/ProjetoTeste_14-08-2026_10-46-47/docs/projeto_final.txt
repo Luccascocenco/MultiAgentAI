@@ -1,0 +1,359 @@
+Vamos continuar desenvolvendo a proposta de arquitetura do sistema Hambúria.
+
+**Módulo de Inserção de Alimentos**
+
+Neste módulo, vamos criar as telas e os formulários necessários para inserir dados dos alimentos. Também vamos implementar o serviço de inserção de alimentos.
+
+*   **Tela de Inserção de Alimentos**
+    ```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inserir Alimento</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Inserir Alimento</h1>
+  <form id="inserir-alimento-form">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome"><br><br>
+    <label for="preco">Preço:</label>
+    <input type="number" step="0.01" id="preco" name="preco"><br><br>
+    <button type="submit">Inserir</button>
+  </form>
+  <script src="script.js"></script>
+</body>
+</html>
+```
+*   **Serviço de Inserção de Alimentos**
+    ```python
+# db.py
+import mysql.connector
+
+class Db:
+    def __init__(self, host, database, user, password):
+        self.host = host
+        self.database = database
+        self.user = user
+        self.password = password
+        self.conn = None
+
+    def conectar(self):
+        self.conn = mysql.connector.connect(
+            host=self.host,
+            database=self.database,
+            user=self.user,
+            password=self.password
+        )
+
+    def get_cursor(self):
+        return self.conn.cursor()
+
+# AlimentosService.py
+from db import Db
+
+class AlimentosService:
+    def __init__(self, db):
+        self.db = db
+
+    def inserir_alimento(self, nome, preco):
+        cursor = self.db.get_cursor()
+        query = "INSERT INTO alimentos (nome, preco) VALUES (%s, %s)"
+        values = (nome, preco)
+        cursor.execute(query, values)
+        self.db.conn.commit()
+        return cursor.lastrowid
+
+# main.py
+from AlimentosService import AlimentosService
+
+if __name__ == "__main__":
+    db = Db('localhost', 'hamburgesa', 'admin', 'senhas')
+    db.conectar()
+
+    service = AlimentosService(db)
+    nome = input("Digite o nome do alimento: ")
+    preco = float(input("Digite o preço do alimento: "))
+
+    id_alimento = service.inserir_alimento(nome, preco)
+
+    print(f"Alimento inserido com sucesso! O ID é {id_alimento}")
+```
+Neste exemplo, estamos criando um serviço de inserção de alimentos que utiliza a biblioteca `mysql-connector-python` para se conectar ao banco de dados MySQL. O serviço tem um método `inserir_alimento` que recebe o nome e preço do alimento e insere-os no banco de dados.
+
+**Módulo de Pedidos**
+
+Neste módulo, vamos criar as telas e os formulários necessários para inserir pedidos. Também vamos implementar o serviço de pedidos.
+
+*   **Tela de Inserção de Pedidos**
+    ```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Pedir Alimento</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Pedir Alimento</h1>
+  <form id="pedir-alimento-form">
+    <label for="id_alimento">ID do Alimento:</label>
+    <input type="number" id="id_alimento" name="id_alimento"><br><br>
+    <button type="submit">Pedir</button>
+  </form>
+  <script src="script.js"></script>
+</body>
+</html>
+```
+*   **Serviço de Pedidos**
+    ```python
+# db.py
+import mysql.connector
+
+class Db:
+    def __init__(self, host, database, user, password):
+        self.host = host
+        self.database = database
+        self.user = user
+        self.password = password
+        self.conn = None
+
+    def conectar(self):
+        self.conn = mysql.connector.connect(
+            host=self.host,
+            database=self.database,
+            user=self.user,
+            password=self.password
+        )
+
+    def get_cursor(self):
+        return self.conn.cursor()
+
+# PedidosService.py
+from db import Db
+
+class PedidosService:
+    def __init__(self, db):
+        self.db = db
+
+    def inserir_pedido(self, id_alimento, data, hora, total):
+        cursor = self.db.get_cursor()
+        query = "INSERT INTO pedidos (id_alimento, data, hora, total) VALUES (%s, %s, %s, %s)"
+        values = (id_alimento, data, hora, total)
+        cursor.execute(query, values)
+        self.db.conn.commit()
+        return cursor.lastrowid
+
+# main.py
+from PedidosService import PedidosService
+
+if __name__ == "__main__":
+    db = Db('localhost', 'hamburgesa', 'admin', 'senhas')
+    db.conectar()
+
+    service = PedidosService(db)
+    id_alimento = int(input("Digite o ID do alimento: "))
+    data = input("Digite a data do pedido: ")
+    hora = input("Digite a hora do pedido: ")
+    total = float(input("Digite o valor do pedido: "))
+
+    id_pedido = service.inserir_pedido(id_alimento, data, hora, total)
+
+    print(f"Pedido inserido com sucesso! O ID é {id_pedido}")
+```
+Neste exemplo, estamos criando um serviço de pedidos que utiliza a biblioteca `mysql-connector-python` para se conectar ao banco de dados MySQL. O serviço tem um método `inserir_pedido` que recebe o ID do alimento, data, hora e valor do pedido e insere-os no banco de dados.
+
+**Módulo de Gerenciamento de Loja**
+
+Neste módulo, vamos criar as telas e os formulários necessários para gerenciar a loja. Também vamos implementar o serviço de gerenciamento de loja.
+
+*   **Tela de Gerenciamento de Loja**
+    ```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Loja</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Gerenciar Loja</h1>
+  <form id="gerenciar-loja-form">
+    <label for="nome_loja">Nome da loja:</label>
+    <input type="text" id="nome_loja" name="nome_loja"><br><br>
+    <button type="submit">Gerenciar</button>
+  </form>
+  <script src="script.js"></script>
+</body>
+</html>
+```
+*   **Serviço de Gerenciamento de Loja**
+    ```python
+# db.py
+import mysql.connector
+
+class Db:
+    def __init__(self, host, database, user, password):
+        self.host = host
+        self.database = database
+        self.user = user
+        self.password = password
+        self.conn = None
+
+    def conectar(self):
+        self.conn = mysql.connector.connect(
+            host=self.host,
+            database=self.database,
+            user=self.user,
+            password=self.password
+        )
+
+    def get_cursor(self):
+        return self.conn.cursor()
+
+# GerenciamentoLojaService.py
+from db import Db
+
+class GerenciamentoLojaService:
+    def __init__(self, db):
+        self.db = db
+
+    def gerenciar_loja(self, nome_loja):
+        cursor = self.db.get_cursor()
+        query = "INSERT INTO lojas (nome) VALUES (%s)"
+        values = (nome_loja,)
+        cursor.execute(query, values)
+        self.db.conn.commit()
+
+# main.py
+from GerenciamentoLojaService import GerenciamentoLojaService
+
+if __name__ == "__main__":
+    db = Db('localhost', 'hamburgesa', 'admin', 'senhas')
+    db.conectar()
+
+    service = GerenciamentoLojaService(db)
+    nome_loja = input("Digite o nome da loja: ")
+    service.gerenciar_loja(nome_loja)
+
+    print(f"Loja gerenciada com sucesso! O nome é {nome_loja}")
+```
+Neste exemplo, estamos criando um serviço de gerenciamento de loja que utiliza a biblioteca `mysql-connector-python` para se conectar ao banco de dados MySQL. O serviço tem um método `gerenciar_loja` que recebe o nome da loja e insere-o no banco de dados.
+
+**Execução do Sistema**
+
+Para executar o sistema, precisamos criar os módulos de front-end, back-end e banco de dados.
+
+*   **Módulo de Front-end**
+    ```python
+# main.py
+from Flask import Flask
+import requests
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'GET':
+        return render_template('index.html')
+    elif request.method == 'POST':
+        # Processar a requisição POST
+        return redirect(url_for('index'))
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+*   **Módulo de Back-end**
+    ```python
+# main.py
+from Flask import Flask, request
+import mysql.connector
+
+app = Flask(__name__)
+
+@app.route('/alimentos', methods=['GET', 'POST'])
+def alimentos():
+    if request.method == 'GET':
+        # Retornar os alimentos
+        return jsonify([{'id': 1, 'nome': 'Hambúrguer'}, {'id': 2, 'nome': 'Pão'}])
+    elif request.method == 'POST':
+        # Processar a requisição POST
+        return redirect(url_for('alimentos'))
+
+@app.route('/pedidos', methods=['GET', 'POST'])
+def pedidos():
+    if request.method == 'GET':
+        # Retornar os pedidos
+        return jsonify([{'id': 1, 'data': '2023-02-20'}, {'id': 2, 'data': '2023-02-21'}])
+    elif request.method == 'POST':
+        # Processar a requisição POST
+        return redirect(url_for('pedidos'))
+
+@app.route('/lojas', methods=['GET'])
+def lojas():
+    # Retornar as lojas
+    return jsonify([{'id': 1, 'nome': 'Loja 1'}, {'id': 2, 'nome': 'Loja 2'}])
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+*   **Módulo de Banco de Dados**
+    ```python
+# db.py
+import mysql.connector
+
+class Db:
+    def __init__(self, host, database, user, password):
+        self.host = host
+        self.database = database
+        self.user = user
+        self.password = password
+        self.conn = None
+
+    def conectar(self):
+        self.conn = mysql.connector.connect(
+            host=self.host,
+            database=self.database,
+            user=self.user,
+            password=self.password
+        )
+
+    def get_cursor(self):
+        return self.conn.cursor()
+
+# main.py
+from db import Db
+
+if __name__ == "__main__":
+    db = Db('localhost', 'hamburgesa', 'admin', 'senhas')
+    db.conectar()
+```
+Neste exemplo, estamos criando os módulos de front-end, back-end e banco de dados utilizando Flask e MySQL.
+
+**Execução do Sistema**
+
+Para executar o sistema, precisamos executar os módulos de front-end, back-end e banco de dados.
+
+*   **Módulo de Front-end**
+    ```bash
+python main.py
+```
+*   **Módulo de Back-end**
+    ```bash
+python main.py
+```
+*   **Módulo de Banco de Dados**
+    ```
+python main.py
+```
+
+Agora o sistema está executado e pode ser acessado no endereço `http://localhost:5000/`.
+
+Espero que isso tenha ajudado!

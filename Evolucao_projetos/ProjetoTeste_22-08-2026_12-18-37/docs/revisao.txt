@@ -1,0 +1,242 @@
+Olá! Parece que você está procurando por um exemplo de código para um site de beleza pessoal com um carrinho de compras. Aqui está um exemplo de código que pode ajudá-lo a criar um site básico:
+
+**HTML**
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Beauty</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+        <img src="logo.png" alt="Logo Blue Beauty">
+    </header>
+    <main>
+        <section class="banner-principal">
+            <h1>Blue Beauty</h1>
+            <p>Beleza pessoal para todos</p>
+            <button>Adicionar ao Carrinho</button>
+        </section>
+        <section class="produtos">
+            <h2>Produtos</h2>
+            <ul class="grid-produtos">
+                <!-- Produtos serão listados aqui -->
+            </ul>
+        </section>
+        <section class="secao-sobre-nos">
+            <h2>Sobre Nós</h2>
+            <p>Blue Beauty é uma marca de beleza pessoal que oferece produtos de alta qualidade para todos os tipos de pele.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Blue Beauty</p>
+        <ul class="redes-sociais">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+        </ul>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+**CSS (no arquivo styles.css)**
+
+```css
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header .logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+header .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-principal {
+    background-color: #3498db;
+    padding: 2em;
+    text-align: center;
+}
+
+.banner-principal h1 {
+    color: #fff;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.banner-principal p {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.banner-principal button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.secao-produtos {
+    padding: 2em;
+    text-align: center;
+}
+
+.secao-produtos h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.produto-1, .produto-2, .produto-3, .produto-4, .produto-5 {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.produto-1 h3, .produto-2 h3, .produto-3 h3, .produto-4 h3, .produto-5 h3 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.produto-1 img, .produto-2 img, .produto-3 img, .produto-4 img, .produto-5 img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.produto-1 p, .produto-2 p, .produto-3 p, .produto-4 p, .produto-5 p {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.produto-1 button, .produto-2 button, .produto-3 button, .produto-4 button, .produto-5 button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.secao-sobre-nos {
+    padding: 2em;
+    text-align: center;
+}
+
+.secao-sobre-nos h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer ul li {
+    margin-right: 20px;
+}
+
+footer ul a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.redes-sociais {
+    color: #fff;
+    font-size: 16px;
+    margin-right: 10px;
+}
+```
+
+**JS (no arquivo script.js)**
+
+```javascript
+// Adicionar evento ao botão de adicionar ao carrinho
+const botoesAdicionarCarrinho = document.querySelectorAll('.btn-adicionar-carrinho');
+
+botoesAdicionarCarrinho.forEach((botao) => {
+    botao.addEventListener('click', () => {
+        const produto = botao.parentNode;
+        const nome = produto.querySelector('h3').textContent;
+        const preco = produto.querySelector('p').textContent;
+        console.log(`Adicionando ${nome} ao carrinho por ${preco}`);
+    });
+});
+```
+
+Espero que isso ajude! Lembre-se de que é necessário adicionar imagens, fontes e outros recursos para tornar o site completo. Além disso, é necessário criar um banco de dados e implementar a lógica de negócios para o site funcionar corretamente.

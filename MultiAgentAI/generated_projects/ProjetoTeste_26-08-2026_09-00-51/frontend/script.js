@@ -1,0 +1,1 @@
+// Código de script geral

@@ -1,0 +1,88 @@
+**Arquitetura do Catálogo de Livros e eBooks**
+
+**Estrutura do Banco de Dados**
+
+O sistema utilizará uma estrutura de banco de dados relacional com as seguintes tabelas:
+
+1. **Produtos**
+   - ID (Primary Key)
+   - Título
+   - Autor
+   - Categoria
+   - Tipo (Livro Físico ou eBook)
+   - Preço
+   - Preço Promocional
+   - Quantidade em Estoque (para livros físicos)
+   - Formato do eBook (se aplicável)
+   - Número de Páginas
+   - Idioma
+   - Editora
+   - Ano de Publicação
+   - Avaliação
+   - Quantidade de Avaliações
+   - Status
+   - Data de Cadastro
+   - URL ou Imagem da Capa
+   - Palavras-chave/Tags
+
+2. **Pedidos**
+   - ID (Primary Key)
+   - ID do Cliente
+   - ID do Produto
+   - Quantidade
+   - Data do Pedido
+   - Status
+
+3. **Promoções**
+   - ID (Primary Key)
+   - ID do Produto
+   - Data de Início
+   - Data de Fim
+   - Desconto
+
+4. **Avaliações**
+   - ID (Primary Key)
+   - ID do Produto
+   - ID do Cliente
+   - Avaliação
+   - Comentário
+   - Data
+
+**Estrutura de Arquivos**
+
+- **Produto**: Arquivo de produto com informações do livro ou eBook, incluindo título, autor, categoria, preço, etc.
+- **Pedidos**: Arquivo de pedidos com informações dos produtos pedidos, incluindo ID do produto, quantidade e data do pedido.
+- **Promoções**: Arquivo de promoções com informações das promoções aplicadas, incluindo ID do produto, data de início e data de fim.
+- **Avaliações**: Arquivo de avaliações com informações das avaliações dos clientes, incluindo avaliação, comentário e data.
+
+**Estrutura de Pastas**
+
+- **Modelos**: Pasta com os modelos de banco de dados (e.g., `Produto.php`, `Pedidos.php`, etc.)
+- **Controleadores**: Pasta com os contadores que lidam com as ações de usuário (e.g., `ProdutoController.php`, `PedidosController.php`, etc.)
+- **Vistas**: Pasta com as vistas que são exibidas para o usuário (e.g., `produto.php`, `pedidos.php`, etc.)
+- **Configurações**: Pasta com as configurações do sistema, incluindo as constantes de conexão com o banco de dados.
+
+**Tecnologias**
+
+- **Linguagem de Programação**: PHP 8+
+- **Framework**: Laravel 9+
+- **Banco de Dados**: MySQL 8+
+- **Front-end**: Bootstrap 5+, JavaScript, HTML5
+
+**Arquitetura do Sistema**
+
+- **Modularidade**: O sistema é dividido em módulos, cada um responsável por um aspecto específico do funcionamento do sistema.
+- **Regras de Negócios**: As regras de negócios são separadas das regras de lógica do sistema, permitindo que as regras de negócios sejam atualizadas ou alteradas sem afetar o funcionamento do sistema.
+- **Testes**: Os testes são realizados para garantir que o sistema funcione corretamente e atenda às necessidades dos usuários.
+
+**Desenvolvimento**
+
+- **Desenvolvimento de Testes**: Os testes são realizados para garantir que o sistema funcione corretamente e atenda às necessidades dos usuários.
+- **Desenvolvimento de Requisitos**: As requisitos do sistema são definidos e documentados para garantir que o desenvolvimento seja focado nas necessidades do sistema.
+- **Desenvolvimento de Code Reviews**: Os códigos são revisados regularmente para garantir que sejam seguros, eficientes e atendam às necessidades do sistema.
+
+**Manutenção**
+
+- **Manutenção de Code**: O código é mantido atualizado e seguro, garantindo que o sistema continue a funcionar corretamente e atender às necessidades dos usuários.
+- **Manutenção de Documentação**: A documentação do sistema é mantida atualizada e segura, garantindo que os usuários possam entender o funcionamento do sistema.
+- **Manutenção de Testes**: Os testes são realizados regularmente para garantir que o sistema continue a funcionar corretamente e atender às necessidades dos usuários.

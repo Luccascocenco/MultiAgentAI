@@ -1,0 +1,149 @@
+:root {
+    --fundo: #FFFEFC;
+    --superficie: #B6AAA3;
+    --texto: #452B1F;
+    --texto-suave: #111111;
+    --primaria: #E7E1EF;
+    --primaria-hover: #DCEEFB;
+    --sobre-primaria: #111111;
+    --borda: #9f9088;
+    --espaco: 20px;
+    --raio: 10px;
+    --sombra: 0 4px 14px rgba(0, 0, 0, 0.35);
+    --fonte: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--fundo);
+    font-family: var(--fonte);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--superficie);
+    padding: 20px;
+    border-bottom: 1px solid var(--borda);
+}
+
+header h1 {
+    font-size: 24px;
+    color: var(--texto);
+    margin-bottom: 10px;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: var(--texto-suave);
+    text-decoration: none;
+}
+
+header nav ul li a:hover {
+    color: var(--primaria);
+}
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--espaco);
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+.produto-card {
+    background-color: var(--superficie);
+    padding: var(--espaco);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    margin: var(--espaco);
+}
+
+.produto-card h3 {
+    font-size: 18px;
+    color: var(--texto);
+    margin-bottom: var(--espaco);
+}
+
+.produto-card p {
+    font-size: 14px;
+    color: var(--texto-suave);
+    margin-bottom: var(--espaco);
+}
+
+.produto-card button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--raio);
+    cursor: pointer;
+}
+
+.produto-card button:hover {
+    background-color: var(--primaria-hover);
+}
+
+#novidades-container {
+    background-color: var(--superficie);
+    padding: 20px;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
+
+#novidades-container h3 {
+    font-size: 18px;
+    color: var(--texto);
+    margin-bottom: var(--espaco);
+}
+
+#novidades-container p {
+    font-size: 14px;
+    color: var(--texto-suave);
+    margin-bottom: var(--espaco);
+}
+
+#novidades-container button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--raio);
+    cursor: pointer;
+}
+
+#novidades-container button:hover {
+    background-color: var(--primaria-hover);
+}
+
+.produtos-grid > .produto-card {
+    background-color: var(--superficie);
+    padding: var(--espaco);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    margin: var(--espaco);
+}
+
+.produtos-grid > .produto-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Ajuste automático: borda, transição e hover dos cards */
+.produto-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+

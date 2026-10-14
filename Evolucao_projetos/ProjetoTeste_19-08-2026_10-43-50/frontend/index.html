@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Roupas Usadas Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="login">
+            <h1>Login</h1>
+            <form>
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password">
+                <button>Entrar</button>
+            </form>
+        </section>
+        <section class="principal">
+            <h1>Principal</h1>
+            <div class="busca-roupas">
+                <h2>Busca Roupas</h2>
+                <form>
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria" name="categoria">
+                        <option value="">Todos</option>
+                        <option value="roupas-de-vestir">Roupas de Vestir</option>
+                        <option value="roupas-de-casa">Roupas de Casa</option>
+                        <option value="roupas-de-esporte">Roupas de Esporte</option>
+                    </select>
+                    <button>Buscar</button>
+                </form>
+            </div>
+            <div class="detalhes-roupas">
+                <h2>Detalhes Roupas</h2>
+                <div class="roupa">
+                    <h3>Roupa 1</h3>
+                    <p>Preço: R$ 50,00</p>
+                    <p>Descrição: Roupa de vestir</p>
+                    <img src="imagens/roupa1.jpg" alt="Roupa 1">
+                </div>
+                <div class="roupa">
+                    <h3>Roupa 2</h3>
+                    <p>Preço: R$ 30,00</p>
+                    <p>Descrição: Roupa de casa</p>
+                    <img src="imagens/roupa2.jpg" alt="Roupa 2">
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

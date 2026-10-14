@@ -1,0 +1,88 @@
+```sql
+-- Tabela diagramas
+CREATE TABLE diagramas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    conteudo TEXT NOT NULL
+);
+
+-- Inserir diagramas
+INSERT INTO diagramas (nome, conteudo) VALUES ('Diagrama 1', 'Conteúdo do Diagrama 1'),
+                                              ('Diagrama 2', 'Conteúdo do Diagrama 2'),
+                                              ('Diagrama 3', 'Conteúdo do Diagrama 3');
+
+-- Tabela produtos
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    diagrama_id INTEGER NOT NULL,
+    nome TEXT NOT NULL,
+    preco REAL NOT NULL,
+    FOREIGN KEY (diagrama_id) REFERENCES diagramas (id)
+);
+
+-- Inserir produtos
+INSERT INTO produtos (diagrama_id, nome, preco) VALUES (1, 'Produto 1', 10.99),
+                                              (1, 'Produto 2', 5.99),
+                                              (2, 'Produto 3', 7.99);
+
+-- Tabela pedidos
+CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    diagrama_id INTEGER NOT NULL,
+    produto_id INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY (diagrama_id) REFERENCES diagramas (id),
+    FOREIGN KEY (produto_id) REFERENCES produtos (id)
+);
+
+-- Inserir pedidos
+INSERT INTO pedidos (diagrama_id, produto_id, quantidade) VALUES (1, 1, 2),
+                                                         (1, 2, 1),
+                                                         (2, 3, 1);
+```
+
+```
+```
+
+```
+-- Tabela diagramas
+CREATE TABLE diagramas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    conteudo TEXT NOT NULL
+);
+
+-- Inserir diagramas
+INSERT INTO diagramas (nome, conteudo) VALUES ('Diagrama 1', 'Conteúdo do Diagrama 1'),
+                                              ('Diagrama 2', 'Conteúdo do Diagrama 2'),
+                                              ('Diagrama 3', 'Conteúdo do Diagrama 3');
+
+-- Tabela produtos
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    diagrama_id INTEGER NOT NULL,
+    nome TEXT NOT NULL,
+    preco REAL NOT NULL,
+    FOREIGN KEY (diagrama_id) REFERENCES diagramas (id)
+);
+
+-- Inserir produtos
+INSERT INTO produtos (diagrama_id, nome, preco) VALUES (1, 'Produto 1', 10.99),
+                                              (1, 'Produto 2', 5.99),
+                                              (2, 'Produto 3', 7.99);
+
+-- Tabela pedidos
+CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    diagrama_id INTEGER NOT NULL,
+    produto_id INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY (diagrama_id) REFERENCES diagramas (id),
+    FOREIGN KEY (produto_id) REFERENCES produtos (id)
+);
+
+-- Inserir pedidos
+INSERT INTO pedidos (diagrama_id, produto_id, quantidade) VALUES (1, 1, 2),
+                                                         (1, 2, 1),
+                                                         (2, 3, 1);
+```

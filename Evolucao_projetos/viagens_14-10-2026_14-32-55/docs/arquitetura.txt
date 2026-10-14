@@ -1,0 +1,248 @@
+**NOMAD TRAVEL - Arquitetura do Site**
+
+**Módulo 1: Cabeçalho**
+
+*   HTML: `static/index.html`
+*   CSS: `static/style.css`
+*   JavaScript: `static/script.js`
+
+**Módulo 2: Página Inicial**
+
+*   HTML: `static/index.html` (seção principal)
+*   CSS: `static/style.css` (seção principal)
+*   JavaScript: `static/script.js` (seção principal)
+
+**Módulo 3: Catálogo de Produtos**
+
+*   HTML: `static/product-list.html`
+*   CSS: `static/product-list.css`
+*   JavaScript: `static/product-list.js`
+
+**Módulo 4: Detalhes do Produto**
+
+*   HTML: `static/product-details.html`
+*   CSS: `static/product-details.css`
+*   JavaScript: `static/product-details.js`
+
+**Módulo 5: Carrinho de Compras**
+
+*   HTML: `static/cart.html`
+*   CSS: `static/cart.css`
+*   JavaScript: `static/cart.js`
+
+**Módulo 6: Página de Pagamento**
+
+*   HTML: `static/payment.html`
+*   CSS: `static/payment.css`
+*   JavaScript: `static/payment.js`
+
+**Módulo 7: Página de Contato**
+
+*   HTML: `static/contact.html`
+*   CSS: `static/contact.css`
+*   JavaScript: `static/contact.js`
+
+**Módulo 8: Página de Erros**
+
+*   HTML: `static/error.html`
+*   CSS: `static/error.css`
+*   JavaScript: `static/error.js`
+
+**Arquivos do Banco de Dados**
+
+*   SQL: `database.db`
+
+**Rotas da API**
+
+*   `/api/product-list`: Lista todos os produtos
+*   `/api/product-details`: Detalhes de um produto específico
+*   `/api/cart`: Atualização do carrinho de compras
+*   `/api/payment`: Pagamento de um pedido
+*   `/api/contact`: Envio de uma mensagem de contato
+*   `/api/error`: Erro de solicitação
+
+**Estrutura de Dados**
+
+*   Tabela de Produtos (`produtos`):
+    *   `id`: Chave primária
+    *   `nome`: Nome do produto
+    *   `descrição`: Descrição do produto
+    *   `preço`: Preço do produto
+    *   `categoria`: Categoria do produto
+*   Tabela de Pedidos (`pedidos`):
+    *   `id`: Chave primária
+    *   `id_produto`: Chave estrangeira referenciando a tabela `produtos`
+    *   `data`: Data de compra
+    *   `total`: Total do pedido
+*   Tabela de Carrinho (`carrinho`):
+    *   `id`: Chave primária
+    *   `id_produto`: Chave estrangeira referenciando a tabela `produtos`
+    *   `quantidade`: Quantidade do produto no carrinho
+*   Tabela de Mensagens de Contato (`mensagens_contato`):
+    *   `id`: Chave primária
+    *   `nome`: Nome do remetente
+    *   `email`: E-mail do remetente
+    *   `mensagem`: Mensagem de contato
+    *   `data`: Data de envio da mensagem
+
+**Rotas HTTP**
+
+*   GET `/api/product-list`: Lista todos os produtos
+*   GET `/api/product-details`: Detalhes de um produto específico
+*   POST `/api/cart`: Atualização do carrinho de compras
+*   GET `/api/payment`: Pagamento de um pedido
+*   POST `/api/contact`: Envio de uma mensagem de contato
+*   GET `/api/error`: Erro de solicitação
+
+**Exemplo de Código**
+
+```python
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# Conexão ao banco de dados
+@app.route('/api/product-list')
+def lista_produtos():
+    # Listagem de produtos
+    produtos = [
+        {'id': 1, 'nome': 'Mala de Viagem', 'descrição': 'Mala de viagem compacta', 'preço': 249.90, 'categoria': 'Mala'},
+        {'id': 2, 'nome': 'Mochila de Viagem', 'descrição': 'Mochila de viagem urbana', 'preço': 159.90, 'categoria': 'Mochila'}
+    ]
+    return jsonify(produtos)
+
+@app.route('/api/product-details', methods=['GET'])
+def detalhes_produto():
+    # Detalhes de um produto específico
+    produto_id = int(request.args.get('id'))
+    produto = [
+        {'id': 1, 'nome': 'Mala de Viagem', 'descrição': 'Mala de viagem compacta', 'preço': 249.90, 'categoria': 'Mala'}
+    ]
+    return jsonify(produto)
+
+@app.route('/api/cart', methods=['POST'])
+def atualiza_carrinho():
+    # Atualização do carrinho de compras
+    produto_id = int(request.json['id_produto'])
+    quantidade = int(request.json['quantidade'])
+    carrinho = [
+        {'id': 1, 'nome': 'Mala de Viagem', 'descrição': 'Mala de viagem compacta', 'preço': 249.90, 'categoria': 'Mala'}
+    ]
+    carrinho[0]['quantidade'] = quantidade
+    return jsonify(carrinho)
+
+@app.route('/api/payment', methods=['GET'])
+def pagamento():
+    # Pagamento de um pedido
+    pedido_id = int(request.args.get('id'))
+    # Implementação de pagamento
+    return jsonify({'status': 'Sucesso'})
+
+@app.route('/api/contact', methods=['POST'])
+def envio_mensagem_contato():
+    # Envio de uma mensagem de contato
+    nome = request.json['nome']
+    email = request.json['email']
+    mensagem = request.json['mensagem']
+    # Implementação de envio de mensagem
+    return jsonify({'status': 'Sucesso'})
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({'error': 'Não encontrado'}), 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+**Arquitetura do Site**
+
+*   Módulo 1: Cabeçalho
+    *   HTML: `static/index.html`
+    *   CSS: `static/style.css`
+    *   JavaScript: `static/script.js`
+*   Módulo 2: Página Inicial
+    *   HTML: `static/index.html` (seção principal)
+    *   CSS: `static/style.css` (seção principal)
+    *   JavaScript: `static/script.js` (seção principal)
+*   Módulo 3: Catálogo de Produtos
+    *   HTML: `static/product-list.html`
+    *   CSS: `static/product-list.css`
+    *   JavaScript: `static/product-list.js`
+*   Módulo 4: Detalhes do Produto
+    *   HTML: `static/product-details.html`
+    *   CSS: `static/product-details.css`
+    *   JavaScript: `static/product-details.js`
+*   Módulo 5: Carrinho de Compras
+    *   HTML: `static/cart.html`
+    *   CSS: `static/cart.css`
+    *   JavaScript: `static/cart.js`
+*   Módulo 6: Página de Pagamento
+    *   HTML: `static/payment.html`
+    *   CSS: `static/payment.css`
+    *   JavaScript: `static/payment.js`
+*   Módulo 7: Página de Contato
+    *   HTML: `static/contact.html`
+    *   CSS: `static/contact.css`
+    *   JavaScript: `static/contact.js`
+*   Módulo 8: Página de Erros
+    *   HTML: `static/error.html`
+    *   CSS: `static/error.css`
+    *   JavaScript: `static/error.js`
+
+**Tabelas do Banco de Dados**
+
+*   Tabela de Produtos (`produtos`):
+    *   `id`: Chave primária
+    *   `nome`: Nome do produto
+    *   `descrição`: Descrição do produto
+    *   `preço`: Preço do produto
+    *   `categoria`: Categoria do produto
+*   Tabela de Pedidos (`pedidos`):
+    *   `id`: Chave primária
+    *   `id_produto`: Chave estrangeira referenciando a tabela `produtos`
+    *   `data`: Data de compra
+    *   `total`: Total do pedido
+*   Tabela de Carrinho (`carrinho`):
+    *   `id`: Chave primária
+    *   `id_produto`: Chave estrangeira referenciando a tabela `produtos`
+    *   `quantidade`: Quantidade do produto no carrinho
+*   Tabela de Mensagens de Contato (`mensagens_contato`):
+    *   `id`: Chave primária
+    *   `nome`: Nome do remetente
+    *   `email`: E-mail do remetente
+    *   `mensagem`: Mensagem de contato
+    *   `data`: Data de envio da mensagem
+
+**Rotas da API**
+
+*   `/api/product-list`: Lista todos os produtos
+*   `/api/product-details`: Detalhes de um produto específico
+*   `/api/cart`: Atualização do carrinho de compras
+*   `/api/payment`: Pagamento de um pedido
+*   `/api/contact`: Envio de uma mensagem de contato
+*   `/api/error`: Erro de solicitação
+
+**Estrutura de Dados**
+
+*   Tabela de Produtos (`produtos`):
+    *   `id`: Chave primária
+    *   `nome`: Nome do produto
+    *   `descrição`: Descrição do produto
+    *   `preço`: Preço do produto
+    *   `categoria`: Categoria do produto
+*   Tabela de Pedidos (`pedidos`):
+    *   `id`: Chave primária
+    *   `id_produto`: Chave estrangeira referenciando a tabela `produtos`
+    *   `data`: Data de compra
+    *   `total`: Total do pedido
+*   Tabela de Carrinho (`carrinho`):
+    *   `id`: Chave primária
+    *   `id_produto`: Chave estrangeira referenciando a tabela `produtos`
+    *   `quantidade`: Quantidade do produto no carrinho
+*   Tabela de Mensagens de Contato (`mensagens_contato`):
+    *   `id`: Chave primária
+    *   `nome`: Nome do remetente
+    *   `email`: E-mail do remetente
+    *   `mensagem`: Mensagem de contato
+    *   `data`: Data de envio da mensagem

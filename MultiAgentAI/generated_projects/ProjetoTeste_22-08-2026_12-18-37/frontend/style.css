@@ -1,0 +1,205 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header .logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+header .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+header .icon-carrinho {
+    font-size: 24px;
+    color: #fff;
+    margin: 0 auto;
+}
+
+.banner-principal {
+    background-color: #3498db;
+    padding: 2em;
+    text-align: center;
+}
+
+.banner-principal h1 {
+    color: #fff;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.banner-principal p {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.banner-principal button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.degradê-fundo {
+    background: linear-gradient(to bottom, #3498db 0%, #3498db 100%);
+}
+
+.degradê-fundo .grad1 {
+    height: 50%;
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+}
+
+.degradê-fundo .grad2 {
+    height: 50%;
+    background: #3498db;
+    border-radius: 0 0 10px 10px;
+}
+
+.secao-produtos {
+    padding: 2em;
+    text-align: center;
+}
+
+.secao-produtos h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.produto-1, .produto-2, .produto-3, .produto-4, .produto-5 {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.produto-1 h3, .produto-2 h3, .produto-3 h3, .produto-4 h3, .produto-5 h3 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.produto-1 img, .produto-2 img, .produto-3 img, .produto-4 img, .produto-5 img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.produto-1 p, .produto-2 p, .produto-3 p, .produto-4 p, .produto-5 p {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.produto-1 button, .produto-2 button, .produto-3 button, .produto-4 button, .produto-5 button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.secao-sobre-nos {
+    padding: 2em;
+    text-align: center;
+}
+
+.secao-sobre-nos h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.secao-benefícios {
+    padding: 2em;
+    text-align: center;
+}
+
+.secao-benefícios h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer ul li {
+    margin-right: 20px;
+}
+
+footer ul a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.redes-sociais {
+    color: #fff;
+    font-size: 16px;
+    margin-right: 10px;
+}

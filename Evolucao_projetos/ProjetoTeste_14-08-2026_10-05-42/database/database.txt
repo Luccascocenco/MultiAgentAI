@@ -1,0 +1,48 @@
+**Banco de Dados:**
+
+```sql
+CREATE DATABASE hamburgueria;
+
+USE hamburgueria;
+
+CREATE TABLE clientes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  telefone VARCHAR(20),
+  senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE produtos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL,
+  preco DECIMAL(10,2) NOT NULL,
+  descricao TEXT
+);
+
+CREATE TABLE pedidos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  cliente_id INT,
+  produto_id INT,
+  quantidade INT,
+  total DECIMAL(10,2),
+  data DATE NOT NULL,
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+  FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+
+CREATE TABLE contas (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  tipo VARCHAR(255) NOT NULL,
+  valor DECIMAL(10,2) NOT NULL,
+  data DATE NOT NULL
+);
+```
+
+**Observações:**
+
+* O banco de dados foi criado com as tabelas necessárias para armazenar os dados do sistema.
+* As colunas das tabelas foram definidas para garantir a consistência e a segurança dos dados.
+* As chaves estrangeiras foram adicionadas para relacionar as tabelas de clientes, pedidos e contas.
+* A tabela de contas foi criada com um campo `tipo` que pode ser usado para categorizar os tipos de contas.
+* O valor do campo `valor` é definido como decimal(10,2) para garantir que os valores sejam armazenados corretamente.

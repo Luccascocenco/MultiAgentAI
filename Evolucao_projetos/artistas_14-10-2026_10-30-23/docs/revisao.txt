@@ -1,0 +1,86 @@
+Aqui está uma sugestão de como você pode melhorar o código:
+
+**Adicionar docstrings**
+
+Adicione docstrings para cada função para fornecer uma descrição de cada função e seus parâmetros.
+
+**Utilizar tipos de dados mais específicos**
+
+Em vez de utilizar `string` para os parâmetros de entrada, use `str` e `int` respectivamente.
+
+**Adicionar tratamento de erros**
+
+Adicione tratamento de erros para lidar com situações de erro, como quando o produto não é encontrado.
+
+**Melhorar a performance**
+
+Aproveite o uso de índices para melhorar a performance da consulta SQL.
+
+**Utilizar um gerenciador de pacotes de terceiros**
+
+Utilize um gerenciador de pacotes de terceiros como `Flask-SQLAlchemy` para gerenciar o banco de dados.
+
+**Adicionar autenticação e autorização**
+
+Adicione autenticação e autorização para controlar quem pode acessar as funcionalidades da API.
+
+Aqui está o exemplo de como você pode melhorar o código:
+
+```python
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+
+class Produto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    descricao = db.Column(db.String(200), nullable=False)
+    quantidade = db.Column(db.Integer, nullable=False)
+    preco = db.Column(db.Float, nullable=False)
+
+class Pedido(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    produto_id = db.Column(db.Integer, db.ForeignKey("produto.id"), nullable=False)
+    quantidade = db.Column(db.Integer, nullable=False)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@app.route("/api/produtos", methods=["GET"])
+def listar_produtos():
+    produtos = Produto.query.all()
+    return jsonify([{"id": produto.id, "nome": produto.nome, "descricao": produto.descricao, "quantidade": produto.quantidade, "preco": produto.preco} for produto in produtos])
+
+@app.route("/api/produtos/<int:item_id>", methods=["GET"])
+def obter_produto(item_id):
+    produto = Produto.query.get(item_id)
+    if produto is None:
+        return jsonify({"erro": "Produto não encontrado"}), 404
+    return jsonify({"id": produto.id, "nome": produto.nome, "descricao": produto.descricao, "quantidade": produto.quantidade, "preco": produto.preco})
+
+@app.route("/carrinho", methods=["POST"])
+def atualizar_carrinho():
+    dados = request.get_json()
+    produto = Produto.query.get(dados["produtoId"])
+    if produto is None:
+        return jsonify({"erro": "Produto não encontrado"}), 404
+    pedido = Pedido.query.get(dados["id"])
+    if pedido is None:
+        return jsonify({"erro": "Pedido não encontrado"}), 404
+    pedido.quantidade += dados["quantidade"]
+    db.session.commit()
+    return jsonify({"mensagem": "Pedido atualizado com sucesso"}), 200
+
+@app.route("/pedidos", methods=["GET"])
+def listar_pedidos():
+    pedidos = Pedido.query.all()
+    return jsonify([{"id": pedido.id, "produto_id": pedido.produto_id, "quantidade": pedido.quantidade} for pedido in pedidos])
+```
+
+Espero que isso ajude! Se tiver alguma dúvida ou precisar de mais ajuda, não hesite em perguntar.

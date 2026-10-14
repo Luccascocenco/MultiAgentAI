@@ -1,0 +1,46 @@
+**Visão Geral**
+
+O sistema é uma aplicação web responsiva, construída com HTML, CSS e JavaScript puros, utilizando o framework Flask para o backend. O sistema é projetado para gerenciar as informações de uma escola de natação, incluindo turmas, unidades e matrículas.
+
+**Módulos**
+
+1. **Cabeçalho**: Contém o logotipo textual, menu principal, botão de destaque "Matricule-se" e layout adaptado para celulares e computadores.
+2. **Página Inicial**: Apresenta a seção principal (hero) com título, subtítulo, botões "Ver turmas" e "Matricule-se", além de pequenas etiquetas visuais.
+3. **Turmas**: Lista as turmas disponíveis, com imagem, nome, descrição, categoria, preço mensal e botão "Escolher turma".
+4. **Unidades**: Apresenta as unidades da escola, com nome, endereço, bairro e horário de funcionamento.
+5. **Matrículas**: Lista as matrículas de exemplo, com nome do aluno, turma, unidade e status.
+6. **Rodapé**: Contém o nome da escola, frase de promoção e links para as seções do site.
+
+**Arquivos**
+
+1. **index.html**: Página inicial do site, responsiva e adaptada para celulares e computadores.
+2. **style.css**: Arquivo de estilos, com variáveis para as cores da paleta.
+3. **script.js**: Arquivo de scripts, com funções para gerenciar o comportamento dos botões e links.
+
+**Tabelas do Banco de Dados**
+
+1. **turmas**: Contém informações sobre as turmas disponíveis.
+	* colunas: id, nome, imagem, descrição, categoria, preço_mensal
+2. **unidades**: Contém informações sobre as unidades da escola.
+	* colunas: id, nome, endereço, bairro, horario_funcionamento
+3. **matriculas**: Contém informações sobre as matrículas de exemplo.
+	* colunas: id, nome_aluno, turma, unidade, status
+
+**Rotas da API**
+
+1. **GET /turmas**: Retorna a lista de turmas disponíveis.
+2. **GET /unidades**: Retorna a lista de unidades da escola.
+3. **GET /matriculas**: Retorna a lista de matrículas de exemplo.
+4. **POST /matriculas**: Armazena uma nova matrícula de exemplo.
+
+**Layout**
+
+O layout é responsivo, adaptado para celulares e computadores. O cabeçalho é fixo e permanece visível durante a navegação. As seções da página são responsivas e se adaptam ao tamanho da tela.
+
+**Dicas de Desenvolvimento**
+
+* Utilize a paleta de cores fornecida para manter a coesão e a identidade visual do site.
+* Implemente a responsividade para garantir que o site seja acessível em diferentes dispositivos.
+* Utilize a estrutura de tabelas para organizar os dados do banco de dados de forma eficiente.
+* Implemente as rotas da API para gerenciar as requisições do frontend.
+* Utilize o Flask para criar o backend e gerenciar as requisições do frontend.

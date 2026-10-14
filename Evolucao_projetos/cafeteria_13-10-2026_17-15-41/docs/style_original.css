@@ -1,0 +1,108 @@
+:root {
+    --cor-principal: #4B2E1E;
+    --cor-caramelo: #C8863A;
+    --cor-creme: #FFF6E8;
+    --cor-verde-oliva: #5C6B3A;
+    --cor-grafite: #2B2B2B;
+}
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.produto-card {
+    background-color: var(--cor-creme);
+    padding: 20px;
+    border: 1px solid var(--cor-grafite);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.produto-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.produto-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.produto-card button {
+    background-color: var(--cor-caramelo);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.produto-card button:hover {
+    background-color: var(--cor-caramelo-dark);
+}
+
+#menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid var(--cor-grafite);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#menu a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid var(--cor-grafite);
+}
+
+#cardapio {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid var(--cor-grafite);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#unidades {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid var(--cor-grafite);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#pedidos {
+    position: absolute;
+    top: 140px;
+    left: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid var(--cor-grafite);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#fazer-pedido {
+    position: absolute;
+    top: 180px;
+    left: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid var(--cor-grafite);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

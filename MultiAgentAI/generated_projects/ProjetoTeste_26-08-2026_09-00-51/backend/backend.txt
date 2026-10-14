@@ -1,0 +1,289 @@
+```python
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+# Routes
+@app.route("/", methods=["GET", "POST"])
+def index():
+    return render_template("index.html")
+
+@app.route("/categorias", methods=["GET", "POST"])
+def categorias():
+    return render_template("categorias.html")
+
+@app.route("/produtos", methods=["GET", "POST"])
+def produtos():
+    return render_template("produtos.html")
+
+@app.route("/produtos-individuais", methods=["GET", "POST"])
+def produtos_individuais():
+    return render_template("produtos-individuais.html")
+
+@app.route("/carrinho", methods=["GET", "POST"])
+def carrinho():
+    return render_template("carrinho.html")
+
+@app.route("/checkout", methods=["GET", "POST"])
+def checkout():
+    return render_template("checkout.html")
+
+@app.route("/sobre-nos", methods=["GET", "POST"])
+def sobre_nos():
+    return render_template("sobre-nos.html")
+
+@app.route("/contato", methods=["GET", "POST"])
+def contato():
+    return render_template("contato.html")
+
+@app.route("/newsletter", methods=["GET", "POST"])
+def newsletter():
+    return render_template("newsletter.html")
+
+@app.route("/footer", methods=["GET", "POST"])
+def footer():
+    return render_template("footer.html")
+
+# Configurações
+app.config["SECRET_KEY"] = "secret_key_here"
+
+# Run
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+```python
+# imports
+from flask import Flask, render_template, request, send_file
+from werkzeug.utils import secure_filename
+import os
+
+# Configurações
+app = Flask(__name__)
+app.config["UPLOAD_FOLDER"] = "assets/quadros"
+app.config["ALLOWED_EXTENSIONS"] = ["jpg", "png", "gif"]
+
+# Função para upload de arquivo
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS"]
+
+# Route para upload de arquivo
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    if request.method == "POST":
+        # Verificar se o arquivo é uma imagem
+        if request.files and allowed_file(request.files["file"].filename):
+            filename = secure_filename(request.files["file"].filename)
+            request.files["file"].save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            return "Arquivo upload com sucesso!"
+        else:
+            return "Arquivo não é uma imagem!"
+
+# Route para visualizar arquivo
+@app.route("/visualizar/<filename>")
+def visualizar_arquivo(filename):
+    return send_file(os.path.join(app.config["UPLOAD_FOLDER"], filename), mimetype="image/jpeg")
+
+# Run
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+```python
+# imports
+from flask import Flask, render_template, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+import os
+
+# Configurações
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///loja.db"
+db = SQLAlchemy(app)
+
+# Tabela de produtos
+class Produto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    preço = db.Column(db.Float, nullable=False)
+    imagem = db.Column(db.String(100), nullable=False)
+
+# Route para listar produtos
+@app.route("/produtos", methods=["GET"])
+def listar_produtos():
+    produtos = Produto.query.all()
+    return jsonify([{"id": p.id, "nome": p.nome, "preço": p.preço, "imagem": p.imagem} for p in produtos])
+
+# Route para adicionar produto
+@app.route("/produtos", methods=["POST"])
+def adicionar_produto():
+    nome = request.json["nome"]
+    preço = request.json["preço"]
+    imagem = request.json["imagem"]
+    produto = Produto(nome=nome, preço=preço, imagem=imagem)
+    db.session.add(produto)
+    db.session.commit()
+    return "Produto adicionado com sucesso!"
+
+# Route para atualizar produto
+@app.route("/produtos/<int:id>", methods=["PUT"])
+def atualizar_produto(id):
+    produto = Produto.query.get(id)
+    if produto:
+        nome = request.json["nome"]
+        preço = request.json["preço"]
+        imagem = request.json["imagem"]
+        produto.nome = nome
+        produto.preço = preço
+        produto.imagem = imagem
+        db.session.commit()
+        return "Produto atualizado com sucesso!"
+    return "Produto não encontrado!"
+
+# Route para deletar produto
+@app.route("/produtos/<int:id>", methods=["DELETE"])
+def deletar_produto(id):
+    produto = Produto.query.get(id)
+    if produto:
+        db.session.delete(produto)
+        db.session.commit()
+        return "Produto deletado com sucesso!"
+    return "Produto não encontrado!"
+
+# Run
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+```python
+# imports
+from flask import Flask, render_template, request, jsonify
+from flask_restful import Api, Resource
+import os
+
+# Configurações
+app = Flask(__name__)
+api = Api(app)
+
+# Tabela de categorias
+class Categoria(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+
+# Route para listar categorias
+class ListarCategorias(Resource):
+    def get(self):
+        categorias = Categoria.query.all()
+        return [{"id": c.id, "nome": c.nome} for c in categorias]
+
+api.add_resource(ListarCategorias, "/categorias")
+
+# Route para adicionar categoria
+class AdicionarCategoria(Resource):
+    def post(self):
+        nome = request.json["nome"]
+        categoria = Categoria(nome=nome)
+        db.session.add(categoria)
+        db.session.commit()
+        return "Categoria adicionada com sucesso!"
+
+api.add_resource(AdicionarCategoria, "/categorias")
+
+# Route para atualizar categoria
+class AtualizarCategoria(Resource):
+    def put(self, id):
+        categoria = Categoria.query.get(id)
+        if categoria:
+            nome = request.json["nome"]
+            categoria.nome = nome
+            db.session.commit()
+            return "Categoria atualizada com sucesso!"
+        return "Categoria não encontrada!"
+
+api.add_resource(AtualizarCategoria, "/categorias/<int:id>")
+
+# Route para deletar categoria
+class DeletarCategoria(Resource):
+    def delete(self, id):
+        categoria = Categoria.query.get(id)
+        if categoria:
+            db.session.delete(categoria)
+            db.session.commit()
+            return "Categoria deletada com sucesso!"
+        return "Categoria não encontrada!"
+
+api.add_resource(DeletarCategoria, "/categorias/<int:id>")
+
+# Run
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+```python
+# imports
+from flask import Flask, render_template, request, jsonify
+from flask_restful import Api, Resource
+import os
+
+# Configurações
+app = Flask(__name__)
+api = Api(app)
+
+# Tabela de produtos
+class Produto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    preço = db.Column(db.Float, nullable=False)
+    imagem = db.Column(db.String(100), nullable=False)
+
+# Route para listar produtos
+class ListarProdutos(Resource):
+    def get(self):
+        produtos = Produto.query.all()
+        return [{"id": p.id, "nome": p.nome, "preço": p.preço, "imagem": p.imagem} for p in produtos]
+
+api.add_resource(ListarProdutos, "/produtos")
+
+# Route para adicionar produto
+class AdicionarProduto(Resource):
+    def post(self):
+        nome = request.json["nome"]
+        preço = request.json["preço"]
+        imagem = request.json["imagem"]
+        produto = Produto(nome=nome, preço=preço, imagem=imagem)
+        db.session.add(produto)
+        db.session.commit()
+        return "Produto adicionado com sucesso!"
+
+api.add_resource(AdicionarProduto, "/produtos")
+
+# Route para atualizar produto
+class AtualizarProduto(Resource):
+    def put(self, id):
+        produto = Produto.query.get(id)
+        if produto:
+            nome = request.json["nome"]
+            preço = request.json["preço"]
+            produto.nome = nome
+            produto.preço = preço
+            db.session.commit()
+            return "Produto atualizado com sucesso!"
+        return "Produto não encontrado!"
+
+api.add_resource(AtualizarProduto, "/produtos/<int:id>")
+
+# Route para deletar produto
+class DeletarProduto(Resource):
+    def delete(self, id):
+        produto = Produto.query.get(id)
+        if produto:
+            db.session.delete(produto)
+            db.session.commit()
+            return "Produto deletado com sucesso!"
+        return "Produto não encontrado!"
+
+api.add_resource(DeletarProduto, "/produtos/<int:id>")
+
+# Run
+if __name__ == "__main__":
+    app.run(debug=True)
+```

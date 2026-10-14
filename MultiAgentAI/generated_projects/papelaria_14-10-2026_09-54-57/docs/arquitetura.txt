@@ -1,0 +1,55 @@
+**Arquitetura do Site PAPELUME**
+
+**Visão Geral**
+
+O site PAPELUME é uma loja virtual de papelaria criativa que oferece uma experiência agradável e organizada para os clientes. A arquitetura do site é responsiva e fácil de navegar, com uma paleta de cores clara e delicada que reflete a identidade visual da marca.
+
+**Módulos**
+
+1. **Cabeçalho**
+ * Contém o logotipo textual PAPELUME, menu principal, campo de pesquisa de produtos, ícone de carrinho e layout adaptado para celulares e computadores.
+2. **Página Inicial**
+ * Contém a seção principal (hero) com título, subtítulo, botão "Explorar produtos" e botão "Conhecer novidades".
+ * Utiliza uma imagem de destaque com cadernos coloridos, canetas, adesivos, planners e lápis dispostos sobre uma mesa clara.
+3. **Catálogo de Produtos**
+ * Contém uma grade com pelo menos 8 produtos, cada um com imagem, nome, descrição curta e preço em reais, além de um botão "Adicionar ao carrinho".
+4. **Página de Detalhes do Produto**
+ * Contém informações adicionais sobre o produto, como descrição detalhada, características e avaliações.
+5. **Página de Carrinho**
+ * Contém uma lista de itens selecionados, preço total e botão "Finalizar pedido".
+
+**Lista de Arquivos**
+
+* `static/index.html`: arquivo de estrutura do site.
+* `static/style.css`: arquivo de estilo do site.
+* `static/script.js`: arquivo de script do site.
+* `backend.py`: arquivo de backend do site.
+* `database.db`: arquivo de banco de dados do site.
+
+**Tabelas do Banco**
+
+* `produtos`: tabela que armazena informações sobre os produtos.
+	+ `id` (int): identificador do produto.
+	+ `nome` (varchar): nome do produto.
+	+ `descricao` (varchar): descrição do produto.
+	+ `preco` (float): preço do produto.
+* `pedidos`: tabela que armazena informações sobre os pedidos.
+	+ `id` (int): identificador do pedido.
+	+ `produto_id` (int): identificador do produto.
+	+ `quantidade` (int): quantidade do produto.
+	+ `preco_total` (float): preço total do pedido.
+
+**Rotas da API**
+
+* `/produtos`: rota que retorna uma lista de produtos.
+* `/produtos/:id`: rota que retorna informações sobre um produto específico.
+* `/pedidos`: rota que retorna uma lista de pedidos.
+* `/pedidos/:id`: rota que retorna informações sobre um pedido específico.
+* `/carrinho`: rota que retorna o carrinho do usuário.
+
+**Tecnologias Utilizadas**
+
+* Front-end: HTML, CSS e JavaScript puros.
+* Back-end: Python com Flask.
+* Banco de dados: SQLite (arquivo database.db).
+* Nenhuma tecnologia externa é utilizada.

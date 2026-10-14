@@ -1,0 +1,56 @@
+**PATA & CIA — Loja Virtual para Pets**
+
+**Visão Geral**
+
+A PATA & CIA é uma loja virtual especializada em acessórios, brinquedos, camas, higiene e produtos para cães e gatos. O site é moderno, minimalista e responsivo, com uma identidade visual contemporânea e acolhedora.
+
+**Módulos**
+
+1. **Cabeçalho**: Minimista com fundo branco algodão e uma divisória discreta na parte inferior.
+2. **Página Inicial**: Seção de destaque com título principal, subtítulo e botões para explorar produtos e encontrar favoritos.
+3. **Catálogo de Produtos**: Dividido em quatro categorias: Camas e Conforto, Brinquedos e Diversão, Passeio e Acessórios, e Higiene e Organização.
+4. **Carrinho**: Permite adicionar e remover produtos, alterar quantidades e calcular automaticamente o subtotal.
+
+**Arquivos**
+
+- **static/index.html**: Página inicial
+- **static/style.css**: Estilo do site
+- **static/script.js**: Script do site
+
+**Tabelas do Banco de Dados**
+
+- **produtos**:
+  - id (primary key, auto-increment)
+  - nome
+  - imagem
+  - preço
+  - avaliação
+- **carrinho**:
+  - id (primary key, auto-increment)
+  - id_produto
+  - quantidade
+- **ordens**:
+  - id (primary key, auto-increment)
+  - id_usuario
+  - data
+  - total
+  - status
+
+**Rotas da API**
+
+- **/produtos**: Lista todos os produtos
+- **/produtos/{id}**: Detalhes de um produto específico
+- **/carrinho**: Mostra o carrinho do usuário
+- **/carrinho/{id}**: Atualiza a quantidade de um produto no carrinho
+- **/ordens**: Cria uma nova ordem para o usuário
+
+**Cores e Fonts**
+
+- **Azul piscina pastel — `#D8EEF1`:** Fundos de destaque e seções especiais
+- **Amarelo-creme — `#F5EDCF`:** Etiquetas, promoções e detalhes
+- **Coral suave — `#F3D8D0`:** Elementos decorativos e pequenos destaques
+- **Verde-água claro — `#DCEBE1`:** Fundos secundários e cards
+- **Branco algodão — `#FCFCF9`:** Fundo principal
+- **Cinza quente — `#B9B9B1`:** Bordas e divisórias
+- **Azul profundo — `#36515C`:** Títulos, textos principais e botões
+- **Fonte Open Sans**: Fonte principal do site

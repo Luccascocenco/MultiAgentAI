@@ -1,0 +1,5 @@
+# Bibliotecas de terceiros usadas pelo projeto.
+# O restante (tkinter, sqlite3, re, os, ...) já vem com o Python.
+
+ollama>=0.3    # comunicação com o Ollama (modelo llama3.2) usada pelos agentes
+flask>=3.0     # servidor dos sites gerados (backend.py) e usado no teste automático

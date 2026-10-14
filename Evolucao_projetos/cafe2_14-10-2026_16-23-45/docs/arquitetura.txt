@@ -1,0 +1,93 @@
+**MÓDULO 1 - PROJETO DO SITIO**
+
+O projeto do site MODO CAFÉ é uma loja virtual especializada em cafés especiais, métodos de preparo e acessórios para quem aprecia uma boa xícara de café.
+
+**MÓDULO 2 - DIVISÃO DO SISTEMA**
+
+O sistema do site será dividido em 4 módulos:
+
+*   **Módulo 1 - Cabeçalho e Index**
+*   **Módulo 2 - Catálogo de Produtos**
+*   **Módulo 3 - Compras e Carrinho**
+*   **Módulo 4 - Contato e Configuração**
+
+**MÓDULO 1 - Cabeçalho e Index**
+
+*   **Cabeçalho:**
+    *   Logotipo textual MODO CAFÉ
+    *   Menu de navegação (Início, Cafés, Métodos de Preparo, Acessórios, Kits, Ofertas)
+    *   Ícones de pesquisa, conta do usuário, favoritos e carrinho de compras
+*   **Index:**
+    *   Seção principal de destaque (hero section) com uma composição dividida: texto à esquerda e fotografia à direita
+    *   Título principal: "SEU MOMENTO. SEU CAFÉ"
+    *   Subtítulo: "Descubra novos sabores, explore métodos de preparo e transforme sua pausa em um ritual especial"
+    *   Diferenciais com ícones minimalistas
+    *   Seção de categorias com cards ilustrados para Cafés em Grãos, Cafés Moídos, Métodos de Preparo e Acessórios
+    *   Seção chamada "Seu próximo café favorito" destacando alguns produtos do catálogo em cards elegantes
+
+**MÓDULO 2 - Catálogo de Produtos**
+
+*   **Tabela de Produtos:**
+    *   Nome do produto
+    *   Imagem do produto
+    *   Descrição curta do produto
+    *   Preço do produto
+    *   Avaliação por estrelas do produto
+    *   Botão de favoritar do produto
+    *   Botão de adicionar ao carrinho do produto
+
+**MÓDULO 3 - Compras e Carrinho**
+
+*   **Carrinho:**
+    *   Lista de produtos adicionados ao carrinho
+    *   Quantidade de cada produto
+    *   Subtotal do carrinho
+    *   Botão de calcular subtotal
+    *   Botão de adicionar produto ao carrinho
+    *   Botão de remover produto do carrinho
+*   **Pagamento:**
+    *   Formulário de pagamento com campos para nome, e-mail e método de pagamento
+    *   Botão de realizar pagamento
+*   **Confirmação:**
+    *   Mensagem de confirmação ao adicionar produto ao carrinho
+    *   Mensagem de confirmação ao realizar pagamento
+
+**MÓDULO 4 - Contato e Configuração**
+
+*   **Contato:**
+    *   Formulário de contato com campos para nome, e-mail e mensagem
+    *   Botão de enviar mensagem
+*   **Configuração:**
+    *   Opções de personalização do site (cor, fonte, layout)
+    *   Botão de salvar configuração
+
+**Banco de Dados**
+
+*   **Tabela de Produtos:**
+    *   nome_produto (nome do produto)
+    *   imagem_produto (imagem do produto)
+    *   descricao_produto (descrição curta do produto)
+    *   preco_produto (preço do produto)
+    *   avaliacao_produto (avaliação por estrelas do produto)
+*   **Tabela de Pedidos:**
+    *   id_pedido (ID do pedido)
+    *   id_produto (ID do produto)
+    *   quantidade (quantidade do produto)
+    *   subtotal (subtotal do pedido)
+    *   data_pedido (data do pedido)
+*   **Tabela de Favoritos:**
+    *   id_favorito (ID do favorito)
+    *   id_produto (ID do produto)
+    *   data_favorito (data do favorito)
+
+**Rotas da API**
+
+*   **GET /produtos:** Retornar uma lista de produtos
+*   **GET /produtos/{id_produto}:** Retornar um produto específico
+*   **POST /pedidos:** Adicionar um pedido
+*   **GET /pedidos/{id_pedido}:** Retornar um pedido específico
+*   **PUT /produtos/{id_produto}:** Atualizar um produto específico
+*   **DELETE /produtos/{id_produto}:** Excluir um produto específico
+*   **GET /favoritos:** Retornar uma lista de produtos favoritos
+*   **POST /favoritos:** Adicionar um produto favorito
+*   **GET /favoritos/{id_favorito}:** Retornar um produto favorito específico

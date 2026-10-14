@@ -1,0 +1,75 @@
+Aqui está uma proposta de arquitetura para o site Blue Beauty:
+
+**Estrutura do Site**
+
+1. **Cabeçalho**
+	* Logo "Blue Beauty"
+	* Menu de navegação: Início, Produtos, Sobre Nós, Contato
+	* Ícone de carrinho de compras
+	* Visualmente organizado tanto em computadores quanto em celulares
+2. **Banner Principal**
+	* Frase de destaque: "Realce sua beleza com Blue Beauty"
+	* Texto apresentando a loja e botão "Comprar agora"
+	* Fundo em degradê de tons de azul
+	* Aparência sofisticada e moderna
+3. **Seção de Produtos**
+	* Título: "Nossos Produtos"
+	* 5 produtos de maquiagem:
+		+ Batom Blue Shine
+		+ Iluminador Glow
+		+ Paleta Ocean Eyes
+		+ Delineador Perfect Line
+		+ Blush Fresh
+	* Cada produto com:
+		+ Nome
+		+ Imagem ou espaço reservado para imagem
+		+ Breve descrição
+		+ Preço em reais (R$)
+		+ Botão "Adicionar ao carrinho"
+	* Cards modernos, organizados em uma grade
+	* Borda arredondada, sombras suaves e animações discretas ao passar o mouse
+4. **Seção Sobre a Loja**
+	* Texto explicando que a Blue Beauty é uma loja dedicada a produtos de maquiagem de qualidade
+	* Informações sobre a loja, como localização e contato
+5. **Benefícios**
+	* Lista de benefícios, como:
+		+ Produtos de qualidade
+		+ Compra segura
+		+ Entrega rápida
+		+ Atendimento especializado
+6. **Rodapé**
+	* Nome da loja
+	* Links para redes sociais
+	* Informações de contato
+	* Copyright da loja
+
+**Estilo Visual**
+
+* Design feminino, elegante e contemporâneo
+* Utilizar espaço em branco, tipografia moderna, ícones delicados e tons de azul harmoniosos
+* Página totalmente responsiva, funcionando corretamente em computadores, tablets e celulares
+* Pequenas animações e efeitos de transição para deixar a experiência mais agradável, mas sem prejudicar a velocidade ou a facilidade de navegação
+
+**Tecnologias Utilizadas**
+
+* HTML5
+* CSS3
+* JavaScript
+* Framework de front-end (opcional)
+
+**Estrutura de Pastas e Arquivos**
+
+* pasta "index.html" (página principal)
+* pasta "produtos" (produtos de maquiagem)
+* pasta "sobre-nós" (informações sobre a loja)
+* pasta "benefícios" (lista de benefícios)
+* pasta "rodapé" (rodapé da página)
+* pasta "imagens" (imagens utilizadas no site)
+* pasta "estilos" (estilos CSS)
+* pasta "fontes" (fontes utilizadas no site)
+
+**Banco de Dados**
+
+* Nenhum banco de dados foi especificado, mas pode ser necessário utilizar um banco de dados como o MySQL ou o MongoDB para armazenar informações de produtos, usuários, etc.
+
+Essa é apenas uma proposta de arquitetura para o site Blue Beauty. É importante lembrar que a implementação do site depende de muitos fatores, como a complexidade das funcionalidades, a quantidade de dados a ser armazenado, etc.

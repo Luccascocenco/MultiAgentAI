@@ -1,0 +1,246 @@
+Aqui está o código para criar os índices ES em Python:
+
+```python
+import elasticsearch
+
+es = elasticsearch.Elasticsearch()
+
+# Crie o índice "produtos-capa"
+es.indices.create(index='produtos-capa', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'capa': {'type': 'string'},
+        }
+    }
+})
+
+# Crie o índice "produtos-registro"
+es.indices.create(index='produtos-registro', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'data_cadastro': {'type': 'date'},
+            'ultima_atualizacao': {'type': 'date'},
+        }
+    }
+})
+
+# Crie o índice "produtos-livros"
+es.indices.create(index='produtos-livros', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'quantidade_em_estoque': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-ebooks"
+es.indices.create(index='produtos-ebooks', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'formato_ebook': {'type': 'string'},
+            'numero_de_paginas': {'type': 'integer'},
+            'idioma': {'type': 'string'},
+            'editora': {'type': 'string'},
+            'ano_de_publicacao': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-promo"
+es.indices.create(index='produtos-promo', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'tipo_promo': {'type': 'string'},
+            'valor_promo': {'type': 'float'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-avaliacao"
+es.indices.create(index='produtos-avaliacao', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'avaliacao': {'type': 'float'},
+            'comentario': {'type': 'string'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-pedido"
+es.indices.create(index='produtos-pedido', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+            'subtotal': {'type': 'float'},
+            'desconto': {'type': 'float'},
+            'valor_total': {'type': 'float'},
+        }
+    }
+})
+
+# Crie o índice "produtos-carrinho"
+es.indices.create(index='produtos-carrinho', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-capa"
+es.indices.create(index='produtos-capa', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'capa': {'type': 'string'},
+        }
+    }
+})
+
+# Crie o índice "produtos-registro"
+es.indices.create(index='produtos-registro', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'data_cadastro': {'type': 'date'},
+            'ultima_atualizacao': {'type': 'date'},
+        }
+    }
+})
+
+# Crie o índice "produtos-livros"
+es.indices.create(index='produtos-livros', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'quantidade_em_estoque': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-ebooks"
+es.indices.create(index='produtos-ebooks', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'formato_ebook': {'type': 'string'},
+            'numero_de_paginas': {'type': 'integer'},
+            'idioma': {'type': 'string'},
+            'editora': {'type': 'string'},
+            'ano_de_publicacao': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-promo"
+es.indices.create(index='produtos-promo', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'tipo_promo': {'type': 'string'},
+            'valor_promo': {'type': 'float'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-avaliacao"
+es.indices.create(index='produtos-avaliacao', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'avaliacao': {'type': 'float'},
+            'comentario': {'type': 'string'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-pedido"
+es.indices.create(index='produtos-pedido', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+            'subtotal': {'type': 'float'},
+            'desconto': {'type': 'float'},
+            'valor_total': {'type': 'float'},
+        }
+    }
+})
+
+# Crie o índice "produtos-carrinho"
+es.indices.create(index='produtos-carrinho', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+        }
+    }
+})
+
+# Crie o índice "produtos-capa"
+es.indices.create(index='produtos-capa', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'capa': {'type': 'string'},
+        }
+    }
+})
+
+# Crie o índice "produtos-registro"
+es.indices.create(index='produtos-registro', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'data_cadastro': {'type': 'date'},
+            'ultima_atualizacao': {'type': 'date'},
+        }
+    }
+})
+```
+
+Lembre-se de substituir a conexão com o Elasticsearch em `es = elasticsearch.Elasticsearch()` com a sua própria conexão.
+
+Além disso, é recomendado que você verifique a documentação da Elasticsearch para obter mais informações sobre como criar índices e mapear propriedades.

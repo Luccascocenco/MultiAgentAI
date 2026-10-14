@@ -1,0 +1,77 @@
+```sql
+-- arquivo: database.sql
+
+CREATE DATABASE loja_de_roupas_usadas;
+
+USE loja_de_roupas_usadas;
+
+CREATE TABLE usuarios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  senha VARCHAR(255) NOT NULL,
+  tipo VARCHAR(10) NOT NULL CHECK (tipo IN ('admin', 'usuário'))
+);
+
+CREATE TABLE categorias (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE marcas (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE tamanhos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE roupas (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(255) NOT NULL,
+  descricao TEXT NOT NULL,
+  preco DECIMAL(10, 2) NOT NULL,
+  categoria_id INT NOT NULL,
+  marca_id INT NOT NULL,
+  tamanho_id INT NOT NULL,
+  imagem VARCHAR(255),
+  FOREIGN KEY (categoria_id) REFERENCES categorias(id),
+  FOREIGN KEY (marca_id) REFERENCES marcas(id),
+  FOREIGN KEY (tamanho_id) REFERENCES tamanhos(id)
+);
+
+CREATE TABLE compras (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  usuario_id INT NOT NULL,
+  roupa_id INT NOT NULL,
+  data DATE NOT NULL,
+  quantidade INT NOT NULL,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+  FOREIGN KEY (roupa_id) REFERENCES roupas(id)
+);
+
+CREATE TABLE pagamentos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  compra_id INT NOT NULL,
+  metodo VARCHAR(255) NOT NULL,
+  valor DECIMAL(10, 2) NOT NULL,
+  FOREIGN KEY (compra_id) REFERENCES compras(id)
+);
+
+CREATE TABLE comentarios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  usuario_id INT NOT NULL,
+  roupa_id INT NOT NULL,
+  comentario TEXT NOT NULL,
+  data DATE NOT NULL,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+  FOREIGN KEY (roupa_id) REFERENCES roupas(id)
+);
+
+CREATE INDEX idx_usuario_id ON compras(usuario_id);
+CREATE INDEX idx_compra_id ON pagamentos(compra_id);
+CREATE INDEX idx_usuario_id ON comentarios(usuario_id);
+CREATE INDEX idx_roupa_id ON comentarios(roupa_id);
+```

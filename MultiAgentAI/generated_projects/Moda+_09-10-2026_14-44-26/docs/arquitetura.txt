@@ -1,0 +1,47 @@
+**Visão Geral**
+
+A loja de roupas feminina tem como objetivo oferecer uma experiência de compra única e personalizada para as clientes. A paleta de cores rosa e as formas arredondadas são consistentes em toda a interface, criando uma atmosfera acolhedora e feminina.
+
+**Módulos**
+
+O sistema é dividido em 4 módulos principais:
+
+1. **Módulo de Login**: responsável por gerenciar a autenticação dos clientes e administradores.
+2. **Módulo de Produto**: gerencia a lista de produtos disponíveis na loja, incluindo descrições, preços e imagens.
+3. **Módulo de Carrinho**: permite que os clientes adicione produtos ao carrinho e gerencia a lista de produtos adicionados.
+4. **Módulo de Checkout**: processa a compra do cliente e gerencia as informações de pagamento.
+
+**Lista de Arquivos**
+
+* Front-end:
+	+ static/index.html
+	+ static/style.css
+	+ static/script.js
+* Back-end:
+	+ backend.py
+* Banco de Dados:
+	+ database.db
+
+**Tabelas do Banco**
+
+1. **usuários**: armazena as informações de login dos clientes e administradores.
+	+ colunas: id, email, senha, nome, sobrenome
+2. **produtos**: gerencia a lista de produtos disponíveis na loja.
+	+ colunas: id, nome, descrição, preco, imagem
+3. **carrinho**: armazena a lista de produtos adicionados ao carrinho.
+	+ colunas: id, produto_id, quantidade
+
+**Rutas da API**
+
+1. **/login**: permite que os clientes sejam autenticados.
+	+ requisição: POST (email, senha)
+2. **/produtos**: lista os produtos disponíveis na loja.
+	+ requisição: GET
+3. **/carrinho**: lista os produtos adicionados ao carrinho.
+	+ requisição: GET
+4. **/carrinho/adicionar**: adiciona um produto ao carrinho.
+	+ requisição: POST (produto_id, quantidade)
+5. **/carrinho/excluir**: remove um produto do carrinho.
+	+ requisição: POST (produto_id)
+6. **/carrinho/pagar**: processa a compra do cliente.
+	+ requisição: POST (produtos)

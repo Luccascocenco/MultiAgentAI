@@ -1,0 +1,82 @@
+**Rotas da API**
+
+A seguir, são apresentadas as rotas da API que foram implementadas:
+
+*   **/produtos**: Lista todos os produtos.
+*   **/produtos/<int:item_id>**: Obtem um produto específico.
+*   **/produtos**: Cria um novo produto.
+*   **/ordens**: Cria uma nova ordem.
+*   **/clientes**: Lista todos os clientes.
+*   **/clientes/<int:item_id>**: Obtem um cliente específico.
+
+**Métodos HTTP**
+
+A seguir, são apresentados os métodos HTTP utilizados nas rotas da API:
+
+*   **GET**: Lista todos os produtos, obtem um produto específico, lista todos os clientes, obtem um cliente específico.
+*   **POST**: Cria um novo produto, cria uma nova ordem.
+
+**Exemplos de Comando SQL**
+
+A seguir, são apresentados os exemplos de comandos SQL utilizados nas rotas da API:
+
+*   **INSERT INTO clientes (nome, email) VALUES ('João', 'joao@example.com')**: Insere um novo cliente.
+*   **INSERT INTO produtos (nome, descricao, preco, imagem) VALUES ('Camiseta Oversized Preta', 'Camiseta confortável, com modelagem ampla e estilo urbano.', 79.90, 'img/camiseta_oversized_preta.jpg')**: Insere um novo produto.
+*   **INSERT INTO ordens (cliente_id, produtos, preco_total) VALUES (1, 'Camiseta Oversized Preta', 79.90)**: Insere uma nova ordem.
+*   **SELECT * FROM clientes**: Recupera todos os clientes.
+*   **SELECT * FROM produtos**: Recupera todos os produtos.
+*   **SELECT * FROM ordens**: Recupera todas as ordens.
+
+**Arquivos de Static**
+
+A seguir, são apresentados os arquivos de static utilizados nas rotas da API:
+
+*   **index.html**: A página inicial do site.
+*   **style.css**: O estilo do site.
+*   **script.js**: O script do site.
+
+**Estrutura de Pastas**
+
+A seguir, é apresentada a estrutura de pastas utilizada nas rotas da API:
+
+*   **static**:
+    *   **index.html**
+    *   **style.css**
+    *   **script.js**
+*   **templates**:
+    *   **cabeçalho.html**
+    *   **menu.html**
+    *   **banner-principal.html**
+    *   **produtos.html**
+    *   **promoçoes.html**
+    *   **contato.html**
+*   **styles**:
+    *   **style.css**
+*   **scripts**:
+    *   **script.js**
+*   **backend**:
+    *   **backend.py**
+*   **database**:
+    *   **database.db**
+
+**Rotas de Exemplo**
+
+A seguir, são apresentadas as rotas de exemplo:
+
+*   **/produtos**:
+    *   **GET**: Lista todos os produtos.
+    *   **POST**: Cria um novo produto.
+*   **/produtos/<int:item_id>**:
+    *   **GET**: Obtem um produto específico.
+    *   **PUT**: Atualiza um produto específico.
+    *   **DELETE**: Exclui um produto específico.
+*   **/ordens**:
+    *   **GET**: Lista todas as ordens.
+    *   **POST**: Cria uma nova ordem.
+*   **/clientes**:
+    *   **GET**: Lista todos os clientes.
+    *   **POST**: Cria um novo cliente.
+*   **/clientes/<int:item_id>**:
+    *   **GET**: Obtem um cliente específico.
+    *   **PUT**: Atualiza um cliente específico.
+    *   **DELETE**: Exclui um cliente específico.

@@ -1,0 +1,26 @@
+FILE: database.sql
+```sql
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    imagem TEXT,
+    preço REAL NOT NULL,
+    avaliação REAL NOT NULL
+);
+
+CREATE TABLE carrinho (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_produto INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY (id_produto) REFERENCES produtos (id)
+);
+
+CREATE TABLE ordens (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuario INTEGER,
+    data DATE NOT NULL,
+    total REAL NOT NULL,
+    status TEXT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios (id)
+);
+```

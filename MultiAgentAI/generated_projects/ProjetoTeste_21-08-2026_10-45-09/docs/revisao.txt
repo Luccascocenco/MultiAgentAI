@@ -1,0 +1,500 @@
+Este código cria índices em Elasticsearch e também cria tabelas no banco de dados PostgreSQL para armazenar os dados dos produtos e relacionamentos entre eles.
+
+**Índices em Elasticsearch:**
+
+```python
+es.indices.create(index='produtos-capa', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'capa': {'type': 'string'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-registro', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'data_cadastro': {'type': 'date'},
+            'ultima_atualizacao': {'type': 'date'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-livros', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'quantidade_em_estoque': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-ebooks', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'formato_ebook': {'type': 'string'},
+            'numero_de_paginas': {'type': 'integer'},
+            'idioma': {'type': 'string'},
+            'editora': {'type': 'string'},
+            'ano_de_publicacao': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-promo', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'tipo_promo': {'type': 'string'},
+            'valor_promo': {'type': 'float'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-avaliacao', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'avaliacao': {'type': 'float'},
+            'comentario': {'type': 'string'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-pedido', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+            'subtotal': {'type': 'float'},
+            'desconto': {'type': 'float'},
+            'valor_total': {'type': 'float'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-carrinho', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-capa', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'capa': {'type': 'string'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-registro', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'data_cadastro': {'type': 'date'},
+            'ultima_atualizacao': {'type': 'date'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-livros', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'quantidade_em_estoque': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-ebooks', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'formato_ebook': {'type': 'string'},
+            'numero_de_paginas': {'type': 'integer'},
+            'idioma': {'type': 'string'},
+            'editora': {'type': 'string'},
+            'ano_de_publicacao': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-promo', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'tipo_promo': {'type': 'string'},
+            'valor_promo': {'type': 'float'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-avaliacao', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'avaliacao': {'type': 'float'},
+            'comentario': {'type': 'string'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-pedido', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+            'subtotal': {'type': 'float'},
+            'desconto': {'type': 'float'},
+            'valor_total': {'type': 'float'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-carrinho', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-capa', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'capa': {'type': 'string'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-registro', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'data_cadastro': {'type': 'date'},
+            'ultima_atualizacao': {'type': 'date'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-livros', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'quantidade_em_estoque': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-ebooks', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'formato_ebook': {'type': 'string'},
+            'numero_de_paginas': {'type': 'integer'},
+            'idioma': {'type': 'string'},
+            'editora': {'type': 'string'},
+            'ano_de_publicacao': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-promo', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'tipo_promo': {'type': 'string'},
+            'valor_promo': {'type': 'float'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-avaliacao', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'avaliacao': {'type': 'float'},
+            'comentario': {'type': 'string'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-pedido', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+            'subtotal': {'type': 'float'},
+            'desconto': {'type': 'float'},
+            'valor_total': {'type': 'float'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-carrinho', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-capa', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'capa': {'type': 'string'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-registro', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'data_cadastro': {'type': 'date'},
+            'ultima_atualizacao': {'type': 'date'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-livros', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'quantidade_em_estoque': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-ebooks', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'titulo': {'type': 'string'},
+            'autor': {'type': 'string'},
+            'categoria': {'type': 'string'},
+            'tipo': {'type': 'string'},
+            'preco': {'type': 'float'},
+            'formato_ebook': {'type': 'string'},
+            'numero_de_paginas': {'type': 'integer'},
+            'idioma': {'type': 'string'},
+            'editora': {'type': 'string'},
+            'ano_de_publicacao': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-promo', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'tipo_promo': {'type': 'string'},
+            'valor_promo': {'type': 'float'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-avaliacao', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'avaliacao': {'type': 'float'},
+            'comentario': {'type': 'string'},
+            'produto': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-pedido', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+            'subtotal': {'type': 'float'},
+            'desconto': {'type': 'float'},
+            'valor_total': {'type': 'float'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-carrinho', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'quantidade': {'type': 'integer'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-capa', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'capa': {'type': 'string'},
+        }
+    }
+})
+
+es.indices.create(index='produtos-registro', body={
+    'mappings': {
+        'properties': {
+            'id': {'type': 'integer'},
+            'produto': {'type': 'integer'},
+            'data_cadastro': {'type': 'date'},
+            'ultima_atualizacao': {'type': 'date'},
+        }
+    }
+})
+```
+
+**Tabelas no banco de dados PostgreSQL:**
+
+```sql
+CREATE TABLE produtos (
+  id SERIAL PRIMARY KEY,
+  titulo VARCHAR(255) NOT NULL,
+  autor VARCHAR(255) NOT NULL,
+  categoria VARCHAR(255) NOT NULL,
+  tipo VARCHAR(255) NOT NULL,
+  preco DECIMAL(10, 2) NOT NULL,
+  quantidade_em_estoque INTEGER NOT NULL
+);
+
+CREATE TABLE livros (
+  id SERIAL PRIMARY KEY,
+  titulo VARCHAR(255) NOT NULL,
+  autor VARCHAR(255) NOT NULL,
+  categoria VARCHAR(255) NOT NULL,
+  tipo VARCHAR(255) NOT NULL,
+  preco DECIMAL(10, 2) NOT NULL,
+  quantidade_em_estoque INTEGER NOT NULL
+);
+
+CREATE TABLE ebooks (
+  id SERIAL PRIMARY KEY,
+  titulo VARCHAR(255) NOT NULL,
+  autor VARCHAR(255) NOT NULL,
+  categoria VARCHAR(255) NOT NULL,
+  tipo VARCHAR(255) NOT NULL,
+  preco DECIMAL(10, 2) NOT NULL,
+  formato_ebook VARCHAR(255) NOT NULL,
+  numero_de_paginas INTEGER NOT NULL,
+  idioma VARCHAR(255) NOT NULL,
+  editora VARCHAR(255) NOT NULL,
+  ano_de_publicacao INTEGER NOT NULL
+);
+
+CREATE TABLE promo (
+  id SERIAL PRIMARY KEY,
+  tipo_promo VARCHAR(255) NOT NULL,
+  valor_promo DECIMAL(10, 2) NOT NULL,
+  produto INTEGER NOT NULL
+);
+
+CREATE TABLE avaliacoes (
+  id SERIAL PRIMARY KEY,
+  avaliacao FLOAT NOT NULL,
+  comentario VARCHAR(255) NOT NULL,
+  produto INTEGER NOT NULL
+);
+
+CREATE TABLE pedidos (
+  id SERIAL PRIMARY KEY,
+  produto INTEGER NOT NULL,
+  quantidade INTEGER NOT NULL,
+  subtotal DECIMAL(10, 2) NOT NULL,
+  desconto DECIMAL(10, 2) NOT NULL,
+  valor_total DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE carrinhos (
+  id SERIAL PRIMARY KEY,
+  produto INTEGER NOT NULL,
+  quantidade INTEGER NOT NULL
+);
+
+CREATE TABLE capas (
+  id SERIAL PRIMARY KEY,
+  produto INTEGER NOT NULL,
+  capa VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE registros (
+  id SERIAL PRIMARY KEY,
+  produto INTEGER NOT NULL,
+  data_cadastro DATE NOT NULL,
+  ultima_atualizacao DATE NOT NULL
+);
+```
+
+Espero que isso ajude!

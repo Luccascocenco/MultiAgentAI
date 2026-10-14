@@ -1,0 +1,53 @@
+**Visão Geral da Arquitetura**
+
+A arquitetura do site Flora Bloom é projetada para ser moderna, responsiva e profissional, refletindo a identidade visual elegante, delicada e natural da floricultura. O objetivo é criar uma experiência de usuário agradável e fácil de navegar.
+
+**Módulos**
+
+1. **Página Inicial** (`pages/index.py`)
+2. **Catálogo de Produtos** (`products/index.py`)
+3. **Detalhes de Produto** (`products/details.py`)
+4. **Carrinho de Compras** (`cart/index.py`)
+5. **Checkout** (`checkout/index.py`)
+6. **Sobre Nós** (`about/index.py`)
+7. **Contato** (`contact/index.py`)
+
+**Arquivos**
+
+* `static/index.html`: arquivo de entrada do site
+* `static/style.css`: arquivo de estilo do site
+* `static/script.js`: arquivo de script do site
+* `backend/backend.py`: arquivo de back-end do site
+* `database/database.db`: arquivo de banco de dados do site
+* `images/`: pasta de imagens do site
+
+**Rotas da API**
+
+* `/products/`: lista todos os produtos
+* `/products/<int:id>`: detalhes de um produto específico
+* `/cart/`: lista itens do carrinho de compras
+* `/cart/<int:id>/`: atualiza ou remove itens do carrinho de compras
+* `/checkout/`: realiza o pagamento e envia o produto ao cliente
+* `/about/`: páginas de sobre nós e contato
+* `/contact/`: formulário de contato
+
+**Tabelas do Banco de Dados**
+
+* `diagramas`: tabela de diagramas
+	+ `id`: chave primária
+	+ `nome`: nome do diagrama
+	+ `conteudo`: conteúdo do diagrama
+* `produtos`: tabela de produtos
+	+ `id`: chave primária
+	+ `nome`: nome do produto
+	+ `descrição`: descrição do produto
+	+ `preco`: preço do produto
+* `compras`: tabela de compras
+	+ `id`: chave primária
+	+ `id_produto`: id do produto comprado
+	+ `data_compra`: data da compra
+	+ `quantidade`: quantidade comprada
+
+**Layout**
+
+O layout do site é responsivo e se adapta a diferentes tamanhos de tela. O cabeçalho é fixo e contém o logotipo, menu, campo de pesquisa e botão de comprar. A página inicial é composta por um título, subtítulo, botão de explorar produtos e botão de ver buquês. O catálogo de produtos é listado em uma grade com imagens, nomes, descrições e preços. O detalhes de produto contém informações adicionais sobre o produto, como a descrição e o preço. O carrinho de compras lista os itens comprados e permite a atualização ou remoção de itens. O checkout é o processo de pagamento e envio do produto ao cliente. As páginas de sobre nós e contato contêm informações adicionais sobre a floricultura.

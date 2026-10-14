@@ -1,0 +1,214 @@
+**Arquivo style.css**
+
+```css
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.produto-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.produto-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.produto-card p {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.produto-card button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.produto-card button:hover {
+    background-color: #3e8e41;
+}
+```
+
+**Arquivo script.js**
+
+```javascript
+async function carregarProdutos() {
+    const container = document.getElementById("produtos-container");
+    try {
+        const resposta = await fetch("/api/diagramas");
+        const diagramas = await resposta.json();
+        container.innerHTML = "";
+
+        diagramas.forEach((diagrama) => {
+            const card = document.createElement("div");
+            card.className = "produto-card";
+            card.innerHTML = `
+                <h3>${diagrama.nome}</h3>
+                <p>${diagrama.conteúdo}</p>
+                <button>Ver mais</button>
+            `;
+            container.appendChild(card);
+        });
+    } catch (erro) {
+        container.innerHTML = "<p>Não foi possível carregar os diagramas.</p>";
+    }
+}
+
+async function carregarNomes() {
+    const resposta = await fetch("/api/nomes");
+    const nomes = await resposta.json();
+    const container = document.getElementById("nomes-container");
+    container.innerHTML = "";
+
+    nomes.forEach((nome) => {
+        const card = document.createElement("div");
+        card.className = "produto-card";
+        card.innerHTML = `
+            <h3>${nome.nome}</h3>
+            <p>${nome.tipo}</p>
+        `;
+        container.appendChild(card);
+    });
+}
+
+async function carregarConteudo() {
+    const resposta = await fetch("/api/conteudo");
+    const conteudos = await resposta.json();
+    const container = document.getElementById("conteudo-container");
+    container.innerHTML = "";
+
+    conteudos.forEach((conteudo) => {
+        const card = document.createElement("div");
+        card.className = "produto-card";
+        card.innerHTML = `
+            <h3>${conteudo.nome}</h3>
+            <p>Quantidade: ${conteudo.quantidade}</p>
+            <p>Preço: R$ ${conteudo.preço.toFixed(2)}</p>
+        `;
+        container.appendChild(card);
+    });
+}
+
+const buttonDiagramas = document.getElementById("button-diagramas");
+const buttonNomes = document.getElementById("button-nomes");
+const buttonConteudo = document.getElementById("button-conteudo");
+
+buttonDiagramas.addEventListener("click", carregarProdutos);
+buttonNomes.addEventListener("click", carregarNomes);
+buttonConteudo.addEventListener("click", carregarConteudo);
+
+const buttonRelatorio = document.getElementById("button-relatorio");
+
+buttonRelatorio.addEventListener("click", () => {
+    const resposta = fetch("/api/relatorio")
+        .then((res) => res.json())
+        .then((relatorio) => {
+            const container = document.getElementById("relatorio-container");
+            container.innerHTML = "";
+            relatorio.forEach((linha) => {
+                const card = document.createElement("div");
+                card.className = "produto-card";
+                card.innerHTML = `
+                    <h3>${linha[0]}</h3>
+                    <p>${linha[1]}</p>
+                    <p>${linha[2]}</p>
+                `;
+                container.appendChild(card);
+            });
+        })
+        .catch((erro) => {
+            const container = document.getElementById("relatorio-container");
+            container.innerHTML = "<p>Não foi possível carregar o relatório.</p>";
+        });
+});
+```
+
+**Arquivo index.html**
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Loja</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>Loja</h1></header>
+    <main>
+        <div id="mensagem-status"></div>
+        <div id="produtos-container" class="produtos-grid"></div>
+        <div id="nomes-container" class="produtos-grid"></div>
+        <div id="conteudo-container" class="produtos-grid"></div>
+        <button id="button-diagramas">Ver diagramas</button>
+        <button id="button-nomes">Ver nomes</button>
+        <button id="button-conteudo">Ver conteúdo</button>
+        <button id="button-relatorio">Gerar relatório</button>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+**Arquivo backend.py**
+
+```python
+from flask import Flask, jsonify
+import sqlite3
+
+app = Flask(__name__)
+
+# Conexão com o banco de dados
+conn = sqlite3.connect('database.db')
+c = conn.cursor()
+
+@app.route('/api/diagramas', methods=['GET'])
+def carregar_diagramas():
+    c.execute("SELECT * FROM diagramas")
+    diagramas = c.fetchall()
+    return jsonify(diagramas)
+
+@app.route('/api/nomes', methods=['GET'])
+def carregar_nomes():
+    c.execute("SELECT * FROM nomes")
+    nomes = c.fetchall()
+    return jsonify(nomes)
+
+@app.route('/api/conteudo', methods=['GET'])
+def carregar_conteudo():
+    c.execute("SELECT * FROM conteudo")
+    conteudos = c.fetchall()
+    return jsonify(conteudos)
+
+@app.route('/api/relatorio', methods=['GET'])
+def gerar_relatorio():
+    c.execute("SELECT * FROM diagramas")
+    diagramas = c.fetchall()
+    c.execute("SELECT * FROM nomes")
+    nomes = c.fetchall()
+    c.execute("SELECT * FROM conteudo")
+    conteudos = c.fetchall()
+    relatorio = []
+    for diagrama in diagramas:
+        relatorio.append([diagrama[0], diagrama[1], diagrama[2]])
+    for nome in nomes:
+        relatorio.append([nome[1], nome[2], nome[0]])
+    for conteudo in conteudos:
+        relatorio.append([conteudo[0], conteudo[1], conteudo[2]])
+    return jsonify(relatorio)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+Lembre-se de criar o banco de dados SQLite e instalar as bibliotecas necessárias ( Flask, sqlite3) para executar o código.

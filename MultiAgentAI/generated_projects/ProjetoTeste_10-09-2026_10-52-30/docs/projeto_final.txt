@@ -1,0 +1,81 @@
+Olá! Estou aqui para ajudar.
+
+Vou resumir as mudanças necessárias para organizar o código de acordo com o padrão Markdown que você mencionou.
+
+**Estrutura do código**
+
+O código atual não segue uma estrutura de arquivo específica, mas vamos reorganizá-lo em pastas e arquivos separados para facilitar a manutenção e a leitura.
+
+**Pastas**
+
+Criaremos as seguintes pastas:
+
+* `static`: para armazenar arquivos estáticos, como imagens, CSS e JavaScript.
+* `templates`: para armazenar arquivos de template HTML.
+* `database`: para armazenar o código do banco de dados.
+* `models`: para armazenar a lógica de negócios e os modelos de dados.
+
+**Arquivos**
+
+Criaremos os seguintes arquivos:
+
+* `index.html` (pastas `templates`): arquivo de template HTML para a página inicial.
+* `plano.html` (pastas `templates`): arquivo de template HTML para a página de plano.
+* `aulas.html` (pastas `templates`): arquivo de template HTML para a página de aulas.
+* `aparadores.html` (pastas `templates`): arquivo de template HTML para a página de aparadores.
+* `sobre_nos.html` (pastas `templates`): arquivo de template HTML para a página de sobre nós.
+* `contato.html` (pastas `templates`): arquivo de template HTML para a página de contato.
+* `database.py` (pastas `database`): arquivo de código para criar e gerenciar o banco de dados.
+* `models.py` (pastas `models`): arquivo de código para definição de modelos de dados e lógica de negócios.
+
+**Código**
+
+O código atual será reorganizado em pastas e arquivos separados para facilitar a manutenção e a leitura.
+
+**Pastas `database`**
+
+O código do banco de dados será armazenado em pastas `database`. Criaremos os seguintes arquivos:
+
+* `__init__.py`: arquivo de inicialização para o módulo `database`.
+* `database.py`: arquivo de código para criar e gerenciar o banco de dados.
+* `models.py`: arquivo de código para definição de modelos de dados e lógica de negócios.
+
+**Pastas `models`**
+
+O código de definição de modelos de dados e lógica de negócios será armazenado em pastas `models`. Criaremos os seguintes arquivos:
+
+* `__init__.py`: arquivo de inicialização para o módulo `models`.
+* `produto.py`: arquivo de código para definição do modelo de produto.
+* `aula.py`: arquivo de código para definição do modelo de aula.
+* `aparador.py`: arquivo de código para definição do modelo de aparador.
+* `plano.py`: arquivo de código para definição do modelo de plano.
+* `contato.py`: arquivo de código para definição do modelo de contato.
+
+**Arquivos `models`**
+
+O código de definição de modelos de dados e lógica de negócios será armazenado em arquivos separados para cada modelo.
+
+**Pastas `templates`**
+
+O código de template HTML será armazenado em pastas `templates`. Criaremos os seguintes arquivos:
+
+* `index.html`: arquivo de template HTML para a página inicial.
+* `plano.html`: arquivo de template HTML para a página de plano.
+* `aulas.html`: arquivo de template HTML para a página de aulas.
+* `aparadores.html`: arquivo de template HTML para a página de aparadores.
+* `sobre_nos.html`: arquivo de template HTML para a página de sobre nós.
+* `contato.html`: arquivo de template HTML para a página de contato.
+
+**Arquivos `static`**
+
+O código de arquivos estáticos, como imagens, CSS e JavaScript, será armazenado em pastas `static`.
+
+**Iniciando o servidor**
+
+O servidor será iniciado com o comando `python database.py` e em seguida `python app.py`.
+
+**Revisão**
+
+O código foi reorganizado em pastas e arquivos separados para facilitar a manutenção e a leitura. A estrutura do código é mais organizada e fácil de entender.
+
+Espero que isso ajude!

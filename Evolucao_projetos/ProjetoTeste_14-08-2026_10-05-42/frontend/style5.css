@@ -1,0 +1,12 @@
+class Contas {
+    constructor(id, saldo) {
+        this.id = id;
+        this.saldo = saldo;
+    }
+
+    getSaldo() {
+        return this.saldo;
+    }
+}
+
+export default Contas;

@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+.login {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.login h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login label {
+    margin-bottom: 10px;
+}
+
+.login input {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+}
+
+.login button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.principal {
+    background-color: #f7f7f7;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.busca-roupas {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.busca-roupas h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.busca-roupas form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.busca-roupas label {
+    margin-bottom: 10px;
+}
+
+.busca-roupas select {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+}
+
+.busca-roupas button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.detalhes-roupas {
+    background-color: #f7f7f7;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.detalhes-roupas h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.detalhes-roupas .roupa {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.detalhes-roupas .roupa h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.detalhes-roupas .roupa p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.detalhes-roupas .roupa img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}

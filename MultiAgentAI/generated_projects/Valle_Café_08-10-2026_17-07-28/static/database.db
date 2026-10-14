@@ -1,0 +1,25 @@
+-- Criar tabela de diagramas
+CREATE TABLE diagramas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    conteudo TEXT NOT NULL
+);
+
+-- Criar tabela de produtos
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    diagrama_id INTEGER NOT NULL,
+    nome TEXT NOT NULL,
+    preco REAL NOT NULL,
+    FOREIGN KEY (diagrama_id) REFERENCES diagramas (id)
+);
+
+-- Criar tabela de pedidos
+CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    diagrama_id INTEGER NOT NULL,
+    produto_id INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY (diagrama_id) REFERENCES diagramas (id),
+    FOREIGN KEY (produto_id) REFERENCES produtos (id)
+);

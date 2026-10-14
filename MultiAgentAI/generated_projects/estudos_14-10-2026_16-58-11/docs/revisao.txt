@@ -1,0 +1,142 @@
+Abaixo está a explicação dos códigos e suas partes:
+
+**Iniciando o Flask App**
+
+```python
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+from os import environ
+import sqlite3
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projetos.db'
+db = SQLAlchemy(app)
+
+# Configuração do banco de dados
+def inicializar_banco():
+    conn = sqlite3.connect('projetos.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS produtos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            preco REAL NOT NULL,
+            imagem TEXT,
+            descricao TEXT NOT NULL,
+            categoria TEXT NOT NULL
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS carrinho (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            produto_id INTEGER NOT NULL,
+            quantidade INTEGER NOT NULL,
+            FOREIGN KEY (produto_id) REFERENCES produtos (id)
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS pedidos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            cliente TEXT NOT NULL,
+            data DATETIME NOT NULL,
+            total REAL NOT NULL,
+            imagem TEXT
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS pedidos_itens (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            pedido_id INTEGER NOT NULL,
+            produto_id INTEGER NOT NULL,
+            quantidade INTEGER NOT NULL,
+            FOREIGN KEY (pedido_id) REFERENCES pedidos (id),
+            FOREIGN KEY (produto_id) REFERENCES produtos (id)
+        )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+@app.route('/', methods=['GET'])
+def index():
+    return 'Bem-vindo ao sistema de compras!'
+
+# Rotas do sistema de compras
+@app.route('/api/produtos', methods=['GET'])
+def listar_produtos():
+    conn = get_db_connection()
+    linhas = conn.execute("SELECT id, nome, preco, imagem, descricao, categoria FROM produtos").fetchall()
+    conn.close()
+    return jsonify([dict(linha) for linha in linhas])
+
+@app.route('/api/produtos/<int:item_id>', methods=['GET'])
+def obter_produto(item_id):
+    conn = get_db_connection()
+    linha = conn.execute("SELECT id, nome, preco, imagem, descricao, categoria FROM produtos WHERE id = ?", (item_id,)).fetchone()
+    conn.close()
+    if linha is None:
+        return jsonify({"erro": "Produto não encontrado"}), 404
+    return jsonify(dict(linha))
+
+@app.route('/api/produtos', methods=['POST'])
+def criar_produto():
+    dados = request.get_json()
+    conn = get_db_connection()
+    cursor = conn.execute("INSERT INTO produtos (nome, preco, imagem, descricao, categoria) VALUES (?, ?, ?, ?, ?)", (dados["nome"], dados["preco"], dados.get("imagem"), dados.get("descricao"), dados["categoria"]))
+    conn.commit()
+    novo_id = cursor.lastrowid
+    conn.close()
+    return jsonify({"id": novo_id}), 201
+
+@app.route('/api/carrinho', methods=['GET'])
+def listar_carrinho():
+    conn = get_db_connection()
+    linhas = conn.execute("SELECT id, produto_id, quantidade FROM carrinho").fetchall()
+    conn.close()
+    return jsonify([dict(linha) for linha in linhas])
+
+@app.route('/api/carrinho', methods=['POST'])
+def adicionar_carrinho():
+    dados = request.get_json()
+    conn = get_db_connection()
+    cursor = conn.execute("INSERT INTO carrinho (produto_id, quantidade) VALUES (?, ?)", (dados["produto_id"], dados["quantidade"]))
+    conn.commit()
+    conn.close()
+    return jsonify({"id": cursor.lastrowid})
+
+@app.route('/api/carrinho', methods=['DELETE'])
+def remover_carrinho():
+    dados = request.get_json()
+    conn = get_db_connection()
+    cursor = conn.execute("DELETE FROM carrinho WHERE id = ?", (dados["id"],))
+    conn.commit()
+    conn.close()
+    return jsonify({"id": cursor.lastrowid})
+
+@app.route('/api/pedidos', methods=['GET'])
+def listar_pedidos():
+    conn = get_db_connection()
+    linhas = conn.execute("SELECT id, cliente, data, total FROM pedidos").fetchall()
+    conn.close()
+    return jsonify([dict(linha) for linha in linhas])
+
+@app.route('/api/pedidos', methods=['POST'])
+def criar_pedido():
+    dados = request.get_json()
+    conn = get_db_connection()
+    cursor = conn.execute("INSERT INTO pedidos (cliente, data, total) VALUES (?, ?, ?)", (dados["cliente"], dados["data"], dados["total"]))
+    conn.commit()
+    conn.close()
+    return jsonify({"id": cursor.lastrowid})
+
+if __name__ == "__main__":
+    inicializar_banco()
+    porta = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, port=porta)
+```
+Este código cria o Flask App com as configurações necessárias para a API. Ele também define as rotas para cada tipo de endpoint, incluindo listagem, adição, remoção e criação de produtos, itens do carrinho e pedidos. Além disso, ele inicializa o banco de dados com as tabelas necessárias e cria as colunas e regras de relacionamento entre as tabelas.

@@ -1,0 +1,102 @@
+**Arquitetura do Sistema**
+
+**Tabelas do Banco de Dados**
+
+A partir das restrições técnicas fornecidas, decidimos criar uma tabela para os **diagramas**, outra para os **nomes** e outra para os **conteúdos**.
+
+**Tabela Diagramas**
+
+* Nome: **diagramas**
+* Colunas:
+	+ id (int, primary key)
+	+ nome (varchar(255), não nulo)
+	+ conteúdo (text, não nulo)
+
+**Tabela Nomes**
+
+* Nome: **nomes**
+* Colunas:
+	+ id (int, primary key)
+	+ tipo (varchar(10), não nulo) // exemplo: "dunut", "pão", etc.
+	+ nome (varchar(255), não nulo)
+
+**Tabela Conteúdo**
+
+* Nome: **conteúdo**
+* Colunas:
+	+ id (int, primary key)
+	+ nome (varchar(255), não nulo) // nome do dunut
+	+ quantidade (int, não nulo) // quantidade do dunut
+	+ preço (float, não nulo) // preço do dunut
+
+**Estrutura de Pastas e Arquivos**
+
+* **static**: pasta para os arquivos front-end
+	+ **index.html**: arquivo principal do site
+	+ **style.css**: arquivo de estilos CSS
+	+ **script.js**: arquivo de scripts JavaScript
+* **templates**: pasta para os arquivos HTML
+	+ **diagramas.html**: arquivo HTML para exibir os diagramas
+	+ **nome.html**: arquivo HTML para exibir os nomes
+	+ **conteudo.html**: arquivo HTML para exibir os conteúdos
+* **static**: pasta para os arquivos de imagem
+	+ **dunuts**: pasta para as imagens dos dunuts
+* **backend.py**: arquivo principal do servidor
+* **database.db**: arquivo do banco de dados SQLite
+* **log.txt**: arquivo de log para registrar atividades do servidor
+
+**Funcionalidades**
+
+1. Exibir os diagramas com os nomes e conteúdos associados
+2. Exibir os nomes de cada tipo de dunut
+3. Exibir os conteúdos de cada dunut
+4. Gerar um relatório com os dados dos dunuts
+
+**Tecnologias**
+
+* Front-end: HTML, CSS e JavaScript puros
+* Back-end: Python com Flask
+* Banco de dados: SQLite
+* Arquivos: static/index.html, static/style.css, static/script.js, templates/diagramas.html, templates/nome.html, templates/conteudo.html, backend.py, database.db, log.txt
+
+**Estrutura das Tabelas**
+
+```sql
+CREATE TABLE diagramas (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    conteúdo TEXT NOT NULL
+);
+
+CREATE TABLE nomes (
+    id INTEGER PRIMARY KEY,
+    tipo TEXT NOT NULL,
+    nome TEXT NOT NULL
+);
+
+CREATE TABLE conteúdo (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    quantidade INTEGER NOT NULL,
+    preço FLOAT NOT NULL
+);
+```
+
+**Arquivos de Arquitetura**
+
+```
+.
+|---- static
+|       |---- index.html
+|       |---- style.css
+|       |---- script.js
+|---- templates
+|       |---- diagramas.html
+|       |---- nome.html
+|       |---- conteudo.html
+|---- backend.py
+|---- database.db
+|---- log.txt
+```
+
+Espero que isso atenda às suas necessidades!

@@ -1,0 +1,46 @@
+```sql
+-- CREATE TABLE produtos (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     nome TEXT NOT NULL,
+--     descricao TEXT NOT NULL,
+--     preco REAL NOT NULL,
+--     imagem TEXT
+-- );
+
+-- CREATE TABLE pedidos (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     id_produto INTEGER NOT NULL,
+--     quantidade INTEGER NOT NULL,
+--     total REAL NOT NULL,
+--     FOREIGN KEY (id_produto) REFERENCES produtos(id)
+-- );
+
+-- CREATE TABLE usuaris (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     nome TEXT NOT NULL,
+--     email TEXT NOT NULL UNIQUE,
+--     senha TEXT NOT NULL
+-- );
+
+-- INSERT INTO produtos (nome, descricao, preco, imagem)
+-- VALUES
+--     ('Camiseta Básica Premium', 'Camiseta de algodão com modelagem confortável e design minimalista.', 69.90, 'img/camiseta_basica.png'),
+--     ('Blusa Canelada', 'Blusa versátil com textura delicada para combinações casuais.', 79.90, 'img/blusa_canelada.png'),
+--     ('Camisa Oversized', 'Camisa de corte amplo, ideal para looks modernos.', 119.90, 'img/camisa_oversized.png'),
+--     ('Calça Wide Leg', 'Calça de modelagem ampla e caimento elegante.', 149.90, 'img/calca_wide_leg.png'),
+--     ('Vestido Midi Casual', 'Vestido leve para composições elegantes e descontraídas.', 139.90, 'img/vestido_midi_casual.png');
+
+-- INSERT INTO pedidos (id_produto, quantidade, total)
+-- VALUES
+--     (1, 1, 69.90),
+--     (2, 1, 79.90),
+--     (3, 1, 119.90),
+--     (4, 1, 149.90),
+--     (5, 1, 139.90);
+
+-- INSERT INTO usuaris (nome, email, senha)
+-- VALUES
+--     ('João', 'joao@example.com', 'senhajoa'),
+--     ('Maria', 'maria@example.com', 'senhamaria'),
+--     ('Pedro', 'pedro@example.com', 'senhapedro');
+```

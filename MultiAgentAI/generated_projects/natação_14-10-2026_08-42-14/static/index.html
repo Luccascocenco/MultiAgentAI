@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>AQUA VIDA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>AQUA VIDA</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Turmas</a></li>
+                <li><a href="#">Unidades</a></li>
+                <li><a href="#">Matrículas</a></li>
+            </ul>
+        </nav>
+        <button class="botao-destaque">Matricule-se</button>
+    </header>
+    <main>
+        <div id="mensagem-status"></div>
+        <section id="hero">
+            <h1>APRENDA A NADAR COM SEGURANÇA E DIVERSÃO</h1>
+            <p>Aulas para bebês, crianças, adultos e atletas, com professores experientes e piscinas aquecidas o ano todo.</p>
+            <button class="botao-ver-turmas">Ver turmas</button>
+            <button class="botao-matricule-se">Matricule-se</button>
+        </section>
+        <section id="turmas">
+            <h2>Turmas</h2>
+            <div class="produtos-grid">
+                <?php
+                    $turmas = array(
+                        array(
+                            'id' => 1,
+                            'nome' => 'Natação para Bebês',
+                            'imagem' => 'img/natacao_bebes.jpg',
+                            'descricao' => 'Aula com os pais para criar confiança na água',
+                            'categoria' => 'Bebês',
+                            'preco_mensal' => 280.00
+                        ),
+                        array(
+                            'id' => 2,
+                            'nome' => 'Adaptação ao Meio Líquido',
+                            'imagem' => 'img/adaptacao_medio_liquido.jpg',
+                            'descricao' => 'Primeiros contatos com a água para crianças',
+                            'categoria' => 'Infantil',
+                            'preco_mensal' => 260.00
+                        ),
+                        array(
+                            'id' => 3,
+                            'nome' => 'Iniciação Infantil',
+                            'imagem' => 'img/iniciacao_infantil.jpg',
+                            'descricao' => 'Aprendizado dos nados crawl e costas',
+                            'categoria' => 'Infantil',
+                            'preco_mensal' => 250.00
+                        ),
+                        array(
+                            'id' => 4,
+                            'nome' => 'Aperfeiçoamento Juvenil',
+                            'imagem' => 'img/aperefeicoamento_juvenil.jpg',
+                            'descricao' => 'Técnica dos quatro nados para crianças e adolescentes',
+                            'categoria' => 'Juvenil',
+                            'preco_mensal' => 270.00
+                        ),
+                        array(
+                            'id' => 5,
+                            'nome' => 'Natação para Adultos',
+                            'imagem' => 'img/natacao_adultos.jpg',
+                            'descricao' => 'Aprenda a nadar ou perca o medo da água',
+                            'categoria' => 'Adultos',
+                            'preco_mensal' => 300.00
+                        ),
+                        array(
+                            'id' => 6,
+                            'nome' => 'Hidroginástica',
+                            'imagem' => 'img/hidroginastica.jpg',
+                            'descricao' => 'Exercícios de baixo impacto',
+                            'categoria' => 'Adultos',
+                            'preco_mensal' => 240.00
+                        ),
+                        array(
+                            'id' => 7,
+                            'nome' => 'Treino de Resistência',
+                            'imagem' => 'img/treino_resistencia.jpg',
+                            'descricao' => 'Treino para quem quer evoluir em distância e velocidade',
+                            'categoria' => 'Performance',
+                            'preco_mensal' => 320.00
+                        ),
+                        array(
+                            'id' => 8,
+                            'nome' => 'Equipe de Competição',
+                            'imagem' => 'img/equipe_competicao.jpg',
+                            'descricao' => 'Treinos diários para atletas',
+                            'categoria' => 'Performance',
+                            'preco_mensal' => 450.00
+                        )
+                    );
+                ?>
+                <?php foreach ($turmas as $turma): ?>
+                    <div class="produto-card">
+                        <h3><?= $turma['nome'] ?></h3>
+                        <p><?= $turma['descricao'] ?></p>
+                        <p>R$ <?= number_format($turma['preco_mensal'], 2, ',', '.') ?></p>
+                        <button class="botao-rolar" onclick="rolarTabela('turmas', <?= $turma['id'] ?>)">Ver</button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <section id="unidades">
+            <h2>Nossas unidades</h2>
+            <div class="produtos-grid">
+                <?php
+                    $unidades = array(
+                        array(
+                            'id' => 1,
+                            'nome' => 'Unidade Centro',
+                            'endereco' => 'Rua das Palmeiras, 200',
+                            'bairro' => 'Centro',
+                            'horario_funcionamento' => 'Seg a Sáb, 6h às 21h'
+                        ),
+                        array(
+                            'id' => 2,
+                            'nome' => 'Unidade Praia Azul',
+                            'endereco' => 'Av. do Mar, 1500',
+                            'bairro' => 'Praia Azul',
+                            'horario_funcionamento' => 'Todos os dias, 7h às 20h'
+                        ),
+                        array(
+                            'id' => 3,
+                            'nome' => 'Unidade Parque',
+                            'endereco' => 'Rua dos Ipês, 75',
+                            'bairro' => 'Jardim do Parque',
+                            'horario_funcionamento' => 'Seg a Sex, 6h às 22h'
+                        )
+                    );
+                ?>
+                <?php foreach ($unidades as $unidade): ?>
+                    <div class="produto-card">
+                        <h3><?= $unidade['nome'] ?></h3>
+                        <p><?= $unidade['endereco'] ?></p>
+                        <p><?= $unidade['bairro'] ?></p>
+                        <p><?= $unidade['horario_funcionamento'] ?></p>
+                        <button class="botao-rolar" onclick="rolarTabela('unidades', <?= $unidade['id'] ?>)">Ver</button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <section id="matriculas">
+            <h2>Matrículas</h2>
+            <div class="produtos-grid">
+                <?php
+                    $matriculas = array(
+                        array(
+                            'id' => 1,
+                            'nome_aluno' => 'João',
+                            'turma' => 'Natação para Bebês',
+                            'unidade' => 'Unidade Centro'
+                        ),
+                        array(
+                            'id' => 2,
+                            'nome_aluno' => 'Maria',
+                            'turma' => 'Adaptação ao Meio Líquido',
+                            'unidade' => 'Unidade Praia Azul'
+                        ),
+                        array(
+                            'id' => 3,
+                            'nome_aluno' => 'Pedro',
+                            'turma' => 'Iniciação Infantil',
+                            'unidade' => 'Unidade Parque'
+                        ),
+                        array(
+                            'id' => 4,
+                            'nome_aluno' => 'Lucia',
+                            'turma' => 'Aperfeiçoamento Juvenil',
+                            'unidade' => 'Unidade Centro'
+                        ),
+                        array(
+                            'id' => 5,
+                            'nome_aluno' => 'Carlos',
+                            'turma' => 'Natação para Adultos',
+                            'unidade' => 'Unidade Praia Azul'
+                        )
+                    );
+                ?>
+                <?php foreach ($matriculas as $matricula): ?>
+                    <div class="produto-card">
+                        <h3><?= $matricula['nome_aluno'] ?></h3>
+                        <p><?= $matricula['turma'] ?></p>
+                        <p><?= $matricula['unidade'] ?></p>
+                        <p><?= $matricula['status'] ?></p>
+                        <button class="botao-rolar" onclick="rolarTabela('matriculas', <?= $matricula['id'] ?>)">Ver</button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <footer>
+            <p>AQUA VIDA - Nadar é viver melhor desde 2012</p>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Turmas</a></li>
+                <li><a href="#">Unidades</a></li>
+                <li><a href="#">Matrículas</a></li>
+            </ul>
+        </footer>
+            <section id="matriculas">
+            <h2>Matriculas</h2>
+            <div id="matriculas-container" class="produtos-grid"></div>
+        </section>
+        <section id="turmas">
+            <h2>Turmas</h2>
+            <div id="turmas-container" class="produtos-grid"></div>
+        </section>
+        <section id="unidades">
+            <h2>Unidades</h2>
+            <div id="unidades-container" class="produtos-grid"></div>
+        </section>
+</main>
+    <script src="script.js"></script>
+</body>
+</html>

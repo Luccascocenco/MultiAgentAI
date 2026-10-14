@@ -1,0 +1,35 @@
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.produto-card {
+    background-color: #E4EDC8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.produto-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.produto-card p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.produto-card button {
+    background-color: #F3DDE1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.produto-card button:hover {
+    background-color: #C9E4CA;
+}

@@ -1,0 +1,87 @@
+Eu posso fornecer um exemplo de como você pode criar um site de beleza pessoal com um carrinho de compras utilizando Python, Flask e SQL.
+
+**Flask App**
+
+```python
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+
+@app.route('/products', methods=['GET'])
+def get_products():
+    products = Product.query.all()
+    return jsonify([{'id': product.id, 'name': product.name, 'description': product.description, 'price': product.price} for product in products])
+
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    data = request.get_json()
+    user_id = data['user_id']
+    product_id = data['product_id']
+    quantity = data['quantity']
+    cart = Cart(user_id=user_id, product_id=product_id, quantity=quantity)
+    db.session.add(cart)
+    db.session.commit()
+    return jsonify({'message': 'Produto adicionado ao carrinho com sucesso'})
+
+@app.route('/remove_from_cart', methods=['POST'])
+def remove_from_cart():
+    data = request.get_json()
+    cart_id = data['cart_id']
+    cart = Cart.query.get(cart_id)
+    if cart:
+        db.session.delete(cart)
+        db.session.commit()
+        return jsonify({'message': 'Produto removido do carrinho com sucesso'})
+    return jsonify({'message': 'Cartão de compras não encontrado'})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+**Banco de Dados**
+
+```sql
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    descricao TEXT NOT NULL,
+    preco REAL NOT NULL
+);
+
+CREATE TABLE usuarios (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    email TEXT NOT NULL
+);
+
+CREATE TABLE carrinhos (
+    id INTEGER PRIMARY KEY,
+    usuario_id INTEGER NOT NULL,
+    produto_id INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+```
+
+Espero que isso ajude! Lembre-se de que é necessário adicionar mais recursos e lógica para tornar o site completo. Além disso, é necessário criar um servidor para executar o Flask App.

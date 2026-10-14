@@ -1,0 +1,118 @@
+Para resolver este problema, precisamos modificar o script.js para que ele faça uma requisição para a API e pegue os dados do banco de dados. Aqui está o script modificado:
+
+```javascript
+async function carregarProdutos() {
+  const url = "/api/produtos";
+  try {
+    const resposta = await fetch(url);
+    const produtos = await resposta.json();
+    const container = document.getElementById("produtos-container");
+    container.innerHTML = "";
+    produtos.forEach((produto) => {
+      const card = document.createElement("div");
+      card.className = "produto-card";
+      card.innerHTML = `
+        <img src="${produto.imagem}" alt="${produto.nome}">
+        <h2>${produto.nome}</h2>
+        <p>${produto.descricao}</p>
+        <p>Preço: R$ ${produto.preco.toFixed(2)}</p>
+        <button>Comprar</button>
+      `;
+      container.appendChild(card);
+    });
+  } catch (erro) {
+    const container = document.getElementById("produtos-container");
+    container.innerHTML = "<p>Não foi possível carregar os produtos.</p>";
+  }
+}
+
+async function carregarProdutosCarrinho() {
+  const url = "/api/produtos";
+  try {
+    const resposta = await fetch(url);
+    const produtos = await resposta.json();
+    const cart = document.getElementById("carrinho");
+    cart.innerHTML = "";
+    produtos.forEach((produto) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h2>${produto.nome}</h2>
+        <p>Preço: R$ ${produto.preço.toFixed(2)}</p>
+      `;
+      cart.appendChild(card);
+    });
+  } catch (erro) {
+    const cart = document.getElementById("carrinho");
+    cart.innerHTML = "<p>Não foi possível carregar o carrinho.</p>";
+  }
+}
+
+async function carregarProdutos() {
+  carregarProdutosCarrinho();
+  carregarProdutosCarrinho();
+}
+
+carregarProdutos();
+```
+
+No arquivo backend.py, precisamos criar uma API para devolver os dados do banco de dados:
+
+```python
+from flask import Flask, request, jsonify
+import sqlite3
+
+app = Flask(__name__)
+
+# Conexão com o banco de dados
+conn = sqlite3.connect('database.db')
+cursor = conn.cursor()
+
+# Criação das tabelas
+cursor.execute('''
+  CREATE TABLE IF NOT EXISTS produtos (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    imagem TEXT NOT NULL,
+    descrição TEXT NOT NULL,
+    preço REAL NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+''')
+
+# Insere os produtos
+products = [
+  ('Boneca Sofia', 'img/sofia.jpg', 'Boneca com vestido rosa e cabelos longos.', 89.90),
+  ('Boneca Alice', 'img/alice.jpg', 'Boneca fashion com acessórios especiais.', 119.90),
+  ('Boneca Luna', 'img/luna.jpg', 'Boneca com vestido de princesa.', 149.90),
+  ('Boneca Valentina', 'img/valentina.jpg', 'Boneca ruiva com roupas modernas.', 99.90),
+  ('Boneca Bella', 'img/bella.jpg', 'Boneca delicada com conjunto de acessórios.', 129.90)
+]
+cursor.executemany('INSERT INTO produtos VALUES (?, ?, ?, ?)', products)
+
+# Função para devolver os produtos
+def get_produtos():
+  produtos = cursor.execute('SELECT * FROM produtos').fetchall()
+  return produtos
+
+# Função para devolver o carrinho
+def get_carrinho():
+  produtos = cursor.execute('SELECT * FROM produtos').fetchall()
+  return produtos
+
+@app.route('/api/produtos', methods=['GET'])
+def produtos():
+  produtos = get_produtos()
+  return jsonify([dict(item) for item in produtos])
+
+@app.route('/api/produtosCarrinho', methods=['GET'])
+def carrinho():
+  produtos = get_carrinho()
+  return jsonify([dict(item) for item in produtos])
+
+if __name__ == '__main__':
+  app.run(debug=True)
+```
+
+Com essas mudanças, o script.js deve funcionar corretamente, pegando os produtos do banco de dados e mostrando em uma página.

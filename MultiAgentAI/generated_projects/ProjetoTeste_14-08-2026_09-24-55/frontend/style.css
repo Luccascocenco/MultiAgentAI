@@ -1,0 +1,16 @@
+src/
+components/
+pedidos/
+PedidoComponent.js
+PagamentoComponent.js
+GerenciamentoDePedidoComponent.js
+models/
+pedido.js
+inventario.js
+services/
+pedido-service.js
+inventario-service.js
+public/
+index.html
+styles.css
+scripts.js

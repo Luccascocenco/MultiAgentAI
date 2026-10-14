@@ -1,0 +1,13 @@
+{
+    "nome_projeto": "Sistema Academia",
+    "linguagem": "Python",
+    "framework": "Flask",
+    "database": "MySQL",
+    "frontend": [
+        "login.html",
+        "dashboard.html"
+    ],
+    "backend": [
+        "app.py"
+    ]
+}

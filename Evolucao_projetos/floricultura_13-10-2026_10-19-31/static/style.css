@@ -1,0 +1,214 @@
+:root {
+    --fundo: #FFF8EF;
+    --superficie: #F7F7F7;
+    --texto: #455A64;
+    --texto-suave: #111111;
+    --primaria: #8C3048;
+    --primaria-hover: #A87859;
+    --sobre-primaria: #ffffff;
+    --borda: #455A64;
+    --espaco: 20px;
+    --raio: 10px;
+    --sombra: 0 0 10px rgba(0, 0, 0, 0.1);
+    --fonte: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--fundo);
+    font-family: var(--fonte);
+}
+
+header {
+    background-color: var(--primaria);
+    padding: var(--espaco);
+    text-align: center;
+}
+
+header h1 {
+    color: var(--sobre-primaria);
+    font-size: 24px;
+    margin-bottom: var(--espaco);
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li {
+    margin-right: var(--espaco);
+}
+
+nav a {
+    color: var(--sobre-primaria);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--primaria-hover);
+}
+
+#hero {
+    background-image: linear-gradient(to bottom, var(--fundo), #E4E5EA);
+    padding: var(--espaco) var(--espaco);
+    text-align: center;
+}
+
+#hero h1 {
+    font-size: 36px;
+    margin-bottom: var(--espaco);
+}
+
+#hero p {
+    font-size: 18px;
+    color: var(--texto-suave);
+    margin-bottom: var(--espaco);
+}
+
+#hero button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    border: none;
+    padding: var(--espaco) var(--espaco);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#hero button:hover {
+    background-color: var(--primaria-hover);
+}
+
+#produtos {
+    padding: var(--espaco);
+}
+
+#produtos h2 {
+    font-size: 24px;
+    margin-bottom: var(--espaco);
+}
+
+#produtos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--espaco);
+}
+
+.produto-card {
+    background-color: var(--superficie);
+    padding: var(--espaco);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    transition: transform 0.2s ease;
+}
+
+.produto-card:hover {
+    transform: scale(1.1);
+}
+
+.produto-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--raio) var(--raio) 0 0;
+}
+
+.produto-card h3 {
+    font-size: 18px;
+    margin-bottom: var(--espaco);
+}
+
+.produto-card p {
+    font-size: 16px;
+    color: var(--texto-suave);
+    margin-bottom: var(--espaco);
+}
+
+.produto-card button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    border: none;
+    padding: var(--espaco) var(--espaco);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.produto-card button:hover {
+    background-color: var(--primaria-hover);
+}
+
+button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    border: none;
+    padding: var(--espaco) var(--espaco);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--primaria-hover);
+}
+
+nav {
+    background-color: var(--superficie);
+    padding: var(--espaco);
+}
+
+nav a:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--sombra);
+}
+
+#produtos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.produtos {
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.produtos:hover {
+    transform: scale(1.1);
+}
+
+.produtos img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.produtos h2 {
+    font-size: 18px;
+    margin-bottom: var(--espaco);
+}
+
+.produtos p {
+    font-size: 16px;
+    color: var(--texto-suave);
+    margin-bottom: var(--espaco);
+}
+
+.produtos button {
+    background-color: var(--primaria);
+    color: var(--sobre-primaria);
+    border: none;
+    padding: var(--espaco) var(--espaco);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.produtos button:hover {
+    background-color: var(--primaria-hover);
+}

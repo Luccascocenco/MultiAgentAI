@@ -1,0 +1,296 @@
+É um erro no estilo, mas vou ajudá-lo a reorganizar o código de acordo com o padrão Markdown que você mencionou.
+
+**Contato**
+===============
+
+Entre em Contato
+---------------
+
+Sua experiência com nossa academia é importante para nós
+
+**Formulário de Contato**
+-------------------------
+
+```html
+<form>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome"><br><br>
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email"><br><br>
+    <label for="telefone">Telefone:</label>
+    <input type="tel" id="telefone" name="telefone"><br><br>
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" name="mensagem"></textarea><br><br>
+    <input type="submit" value="Enviar">
+</form>
+```
+
+**Back-end**
+=============
+
+**Python com Flask**
+
+```python
+from flask import Flask, jsonify, render_template, send_from_directory
+from flask_sqlalchemy import SQLAlchemy
+import os
+
+app = Flask(__name__, static_folder="static", static_url_path="")
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+
+
+class Produto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    descricao = db.Column(db.String(200), nullable=True)
+    preco = db.Column(db.Float, nullable=False)
+
+    def __repr__(self):
+        return f"Produto('{self.nome}', '{self.descricao}', '{self.preco}')"
+
+
+class Aula(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    descricao = db.Column(db.String(200), nullable=True)
+
+    def __repr__(self):
+        return f"Aula('{self.nome}', '{self.descricao}')"
+
+
+class Aparador(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    descricao = db.Column(db.String(200), nullable=True)
+
+    def __repr__(self):
+        return f"Aparador('{self.nome}', '{self.descricao}')"
+
+
+class Contato(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    telefone = db.Column(db.String(20), nullable=False)
+    mensagem = db.Column(db.String(500), nullable=True)
+
+    def __repr__(self):
+        return f"Contato('{self.nome}', '{self.email}', '{self.telefone}', '{self.mensagem}')"
+
+
+class Plano(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    descricao = db.Column(db.String(200), nullable=True)
+    preco = db.Column(db.Float, nullable=False)
+
+    def __repr__(self):
+        return f"Plano('{self.nome}', '{self.descricao}', '{self.preco}')"
+
+
+def inicializar_banco():
+    with app.app_context():
+        db.create_all()
+        if not Produto.query.count():
+            Produto(
+                nome="Produto Exemplo 1",
+                descricao="Descrição do produto 1",
+                preco=29.90,
+            ).save()
+            Produto(
+                nome="Produto Exemplo 2",
+                descricao="Descrição do produto 2",
+                preco=49.90,
+            ).save()
+            Produto(
+                nome="Produto Exemplo 3",
+                descricao="Descrição do produto 3",
+                preco=19.90,
+            ).save()
+
+        if not Aula.query.count():
+            Aula(
+                nome="Aula de Treino",
+                descricao="Descrição da aula de treino",
+            ).save()
+
+        if not Aparador.query.count():
+            Aparador(
+                nome="Aparador de Treino",
+                descricao="Descrição do aparador de treino",
+            ).save()
+
+        if not Contato.query.count():
+            Contato(
+                nome="Contato 1",
+                email="contato1@example.com",
+                telefone="1234567890",
+                mensagem="Mensagem de contato",
+            ).save()
+
+        if not Plano.query.count():
+            Plano(
+                nome="Plano Básico",
+                descricao="Descrição do plano básico",
+                preco=40.00,
+            ).save()
+            Plano(
+                nome="Plano Médio",
+                descricao="Descrição do plano médio",
+                preco=60.00,
+            ).save()
+            Plano(
+                nome="Plano Plus",
+                descricao="Descrição do plano plus",
+                preco=120.00,
+            ).save()
+
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+
+@app.route("/api/produtos")
+def listar_produtos():
+    produtos = Produto.query.all()
+    return jsonify([dict(p) for p in produtos])
+
+
+@app.route("/api/aulas")
+def listar_aulas():
+    aulas = Aula.query.all()
+    return jsonify([dict(a) for a in aulas])
+
+
+@app.route("/api/aparadores")
+def listar_aparadores():
+    aparadores = Aparador.query.all()
+    return jsonify([dict(a) for a in aparadores])
+
+
+@app.route("/api/planos")
+def listar_planos():
+    planos = Plano.query.all()
+    return jsonify([dict(p) for p in planos])
+
+
+@app.route("/api/contatos")
+def listar_contatos():
+    contatos = Contato.query.all()
+    return jsonify([dict(c) for c in contatos])
+
+
+@app.route("/plano")
+def plano():
+    return render_template("plano.html")
+
+
+@app.route("/aulas")
+def aulas():
+    return render_template("aulas.html")
+
+
+@app.route("/aparadores")
+def aparadores():
+    return render_template("aparadores.html")
+
+
+@app.route("/sobre-nos")
+def sobre_nos():
+    return render_template("sobre_nos.html")
+
+
+@app.route("/contato")
+def contato():
+    return render_template("contato.html")
+
+
+@app.route("/static/<path:path>")
+def send_static(path):
+    return send_from_directory("static", path)
+
+
+if __name__ == "__main__":
+    inicializar_banco()
+    app.run(debug=True, port=5000)
+```
+
+**Banco de Dados**
+================
+
+```sql
+CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    email TEXT NOT NULL,
+    telefone TEXT,
+    mensagem TEXT
+);
+
+CREATE TABLE planos (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    preco REAL NOT NULL,
+    descricao TEXT NOT NULL
+);
+
+CREATE TABLE aulas (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    preco REAL NOT NULL,
+    descricao TEXT NOT NULL
+);
+
+CREATE TABLE equipamentos (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    preco REAL NOT NULL
+);
+
+CREATE TABLE treinos (
+    id INTEGER PRIMARY KEY,
+    data DATE NOT NULL,
+    hora TIME NOT NULL,
+    duracao REAL NOT NULL,
+    cliente_id INTEGER,
+    plano_id INTEGER,
+    aula_id INTEGER,
+    equipamento_id INTEGER,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+    FOREIGN KEY (plano_id) REFERENCES planos(id),
+    FOREIGN KEY (aula_id) REFERENCES aulas(id),
+    FOREIGN KEY (equipamento_id) REFERENCES equipamentos(id)
+);
+
+CREATE TABLE reservas (
+    id INTEGER PRIMARY KEY,
+    data DATE NOT NULL,
+    hora TIME NOT NULL,
+    cliente_id INTEGER,
+    plano_id INTEGER,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+    FOREIGN KEY (plano_id) REFERENCES planos(id)
+);
+
+CREATE TABLE comentarios (
+    id INTEGER PRIMARY KEY,
+    comentario TEXT NOT NULL,
+    data DATE NOT NULL,
+    cliente_id INTEGER,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+CREATE INDEX idx_plano_id ON treinos(plano_id);
+CREATE INDEX idx_aula_id ON treinos(aula_id);
+CREATE INDEX idx_equipamento_id ON treinos(equipamento_id);
+CREATE INDEX idx_cliente_id ON treinos(cliente_id);
+CREATE INDEX idx_reserva_id ON reservas(reserva_id);
+CREATE INDEX idx_comentario_id ON comentarios(comentario_id);
+```
+
+Espero que isso ajude a organizar o código de acordo com o padrão Markdown!

@@ -1,0 +1,15 @@
+# ambiente virtual e caches
+.venv/
+__pycache__/
+*.pyc
+
+# sites gerados pelos agentes (cada execução cria uma pasta nova)
+MultiAgentAI/generated_projects/
+generated_projects/
+
+# memória local dos agentes
+MultiAgentAI/memory/
+
+# bancos e logs criados ao rodar
+*.db
+servidor.log

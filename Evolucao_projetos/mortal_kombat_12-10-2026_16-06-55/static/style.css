@@ -1,0 +1,127 @@
+:root {
+    --cor-primaria: #3498db;
+    --cor-de-destaque: #333;
+    --cor-neutro-1: #f7f7f7;
+    --cor-neutro-2: #e5e5e5;
+    --cor-neutro-3: #ccc;
+    --fonte-sistema: -apple-system, system-ui, sans-serif;
+    --espacamento: 16px;
+    --raio-de-borda: 4px;
+    --sombra: 0 0 10px rgba(0, 0, 0, 0.1);
+    --espacamento-interno: 20px;
+}
+
+body {
+    font-family: var(--fonte-sistema);
+    background-color: var(--cor-neutro-1);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: var(--cor-primaria);
+    color: var(--cor-de-destaque);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header nav a {
+    color: var(--cor-de-destaque);
+    text-decoration: none;
+}
+
+header nav a:hover {
+    color: var(--cor-primaria);
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#mensagem-status {
+    color: var(--cor-de-destaque);
+    margin-bottom: 20px;
+}
+
+#catalogo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--espacamento);
+}
+
+.produto-card {
+    background-color: var(--cor-neutro-1);
+    padding: var(--espacamento-interno);
+    border: var(--raio-de-borda) solid var(--cor-neutro-2);
+    border-radius: var(--raio-de-borda);
+    box-shadow: var(--sombra);
+    cursor: pointer;
+}
+
+.produto-card button {
+    background-color: var(--cor-primaria);
+    color: var(--cor-de-destaque);
+    border: none;
+    padding: var(--espacamento-interno) var(--espacamento);
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.produto-card button:hover {
+    background-color: var(--cor-primaria);
+}
+
+.produto-card:hover {
+    background-color: var(--cor-primaria);
+}
+
+footer {
+    background-color: var(--cor-neutro-1);
+    padding: 20px;
+    text-align: center;
+    color: var(--cor-de-destaque);
+}
+
+footer a {
+    color: var(--cor-de-destaque);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--cor-primaria);
+}
+
+/* Media Query para telas de até 768px */
+@media (max-width: 768px) {
+    main {
+        padding: 20px;
+    }
+    .produtos-grid {
+        gap: var(--espacamento);
+    }
+}
