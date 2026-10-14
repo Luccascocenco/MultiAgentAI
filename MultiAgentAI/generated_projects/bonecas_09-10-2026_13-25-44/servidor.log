@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "C:\Users\sakai\OneDrive - Centro Paula Souza\Área de Trabalho\ProjetoPy\MultiAgentAI\generated_projects\bonecas_09-10-2026_13-25-44\backend.py", line 29, in <module>
-    cursor.executemany('INSERT INTO produtos VALUES (?, ?, ?, ?)', products)
-    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-sqlite3.OperationalError: table produtos has 5 columns but 4 values were supplied

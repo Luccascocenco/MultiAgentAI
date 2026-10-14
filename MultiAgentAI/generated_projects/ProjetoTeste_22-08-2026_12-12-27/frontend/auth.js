@@ -1,1 +1,0 @@
-// Código para autenticação e autorização
