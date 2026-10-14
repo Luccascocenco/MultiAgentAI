@@ -248,7 +248,7 @@ Abra **http://127.0.0.1:5000**. O `database.db` é criado na primeira execução
 
 1. **Clone o repositório**
    ```bash
-   git clone <URL-DO-SEU-REPOSITORIO>
+   git clone <https://github.com/Luccascocenco/MultiAgentAI>
    cd ProjetoPy
    ```
 
