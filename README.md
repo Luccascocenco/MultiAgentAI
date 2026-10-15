@@ -311,3 +311,7 @@ Abra **http://127.0.0.1:5000**. O `database.db` é criado na primeira execução
 ## Tecnologias
 
 Python · Tkinter · Ollama (llama3.2) · Flask · SQLite · HTML/CSS/JavaScript
+
+Integrantes:
+- Luccas cocenço leandro 
+- Maria Eduarda roque sakai
